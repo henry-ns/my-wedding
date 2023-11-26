@@ -57,7 +57,7 @@ export function TimerSection() {
       id="timer"
       className="z-10 flex min-h-screen items-center justify-center"
     >
-      <div className="top-0s absolute left-0 min-h-screen w-20 translate-y-1/3 bg-primary-400/50" />
+      <div className="top-0s absolute left-0 h-[50vh] w-20 translate-y-1/3 bg-primary-400/50" />
 
       <div className="flex space-x-5">
         <TimerUnit label="dias" value={days} />

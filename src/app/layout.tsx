@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="pt-br">
       <body
-        className={`font-sans ${bodyFont.variable} ${headingFont.variable}`}
+        className={`bg-bg font-sans ${bodyFont.variable} ${headingFont.variable}`}
       >
         {children}
       </body>
