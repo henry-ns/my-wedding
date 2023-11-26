@@ -12,26 +12,29 @@ const weddingDate = capitalizeString(
 
 export function HomeSection() {
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center text-center">
-      <h3 className="text-primary-600 relative z-10 text-3xl">{weddingDate}</h3>
+    <section
+      id="home"
+      className="z-10 flex min-h-screen flex-col items-center justify-center overflow-hidden text-center"
+    >
+      <h3 className="relative z-10 text-3xl text-primary-600">{weddingDate}</h3>
 
-      <div className="border-primary-300 rotate-45 border-[19px]">
+      <div className="a animate-spin border-[19px] border-primary-300">
         <Image
           alt="O Casal"
           src="/photo.png"
           width="286"
           height="286"
-          className="-rotate-45"
+          className="-rotate-45 animate-spin-reverse"
         />
       </div>
 
-      <div className="border-b-secondary-300 -ml-2 mb-4 border-b-4 px-4">
+      <div className="-ml-2 mb-4 border-b-4 border-b-secondary-300 px-4">
         <h1 className="relative text-5xl font-bold tracking-widest text-gray-800">
           Henrique & Jennifer
         </h1>
       </div>
 
-      <h2 className="text-secondary-500 relative text-2xl uppercase tracking-[0.25rem]">
+      <h2 className="relative text-2xl uppercase tracking-[0.25rem] text-secondary-500">
         Vão se Casar!
       </h2>
     </section>

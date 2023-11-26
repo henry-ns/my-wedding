@@ -5,6 +5,20 @@ export default {
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
+      keyframes: {
+        "spin-reverse": {
+          "0%": { transform: "rotate(-45deg)" },
+          "100%": { transform: "rotate(-405deg)" },
+        },
+        spin: {
+          "0%": { transform: "rotate(45deg)" },
+          "100%": { transform: "rotate(405deg)" },
+        },
+      },
+      animation: {
+        spin: "spin 14s linear infinite",
+        "spin-reverse": "spin-reverse 14s linear infinite",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         header: "var(--font-header)",

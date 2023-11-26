@@ -5,7 +5,7 @@ import { Lato, Libre_Baskerville } from "next/font/google";
 const headingFont = Libre_Baskerville({
   weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-header",
 });
 
 const bodyFont = Lato({
