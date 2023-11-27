@@ -1,3 +1,4 @@
+import { env } from "../../env";
 import { LocationShape } from "./location-shape";
 
 export function LocationSection() {
@@ -20,7 +21,14 @@ export function LocationSection() {
         </div>
 
         <div className="relative flex-1">
-          <div className="relative z-10 h-52 border-8 border-secondary-500 bg-gray-300" />
+          <iframe
+            src={env.NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL}
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            className="relative z-10 h-[300px] w-full border-8 border-secondary-500"
+          />
+
           <div className="absolute right-0 top-1/2 z-0 h-[150%] w-40 -translate-y-1/2 translate-x-1/2 bg-primary-500/50" />
         </div>
       </div>
@@ -31,3 +39,4 @@ export function LocationSection() {
     </section>
   );
 }
+``;
