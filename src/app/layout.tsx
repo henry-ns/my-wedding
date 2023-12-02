@@ -9,14 +9,14 @@ const headingFont = Libre_Baskerville({
 });
 
 const bodyFont = Lato({
-  weight: ["400"],
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
 export const metadata = {
   title: "Henrique e Jennifer",
-  description: "Henrique e Jennifer vão se casar!",
+  description: "Henrique e Jennifer vão casar!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

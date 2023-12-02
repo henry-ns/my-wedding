@@ -10,7 +10,7 @@ export function LocationShape(props: Props) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M0 0L162 545.5L1280 769H0V0Z" className="fill-primary-500/40" />
+      <path d="M0 0L162 545.5L1280 769H0V0Z" className="fill-primary-300" />
     </svg>
   );
 }

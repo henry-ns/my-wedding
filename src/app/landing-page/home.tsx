@@ -14,7 +14,7 @@ export function HomeSection() {
   return (
     <section
       id="home"
-      className="z-10 flex min-h-screen flex-col items-center justify-center overflow-hidden text-center"
+      className="z-20 flex min-h-screen flex-col items-center justify-center overflow-hidden text-center"
     >
       <h3 className="relative z-10 text-3xl text-primary-600">{weddingDate}</h3>
 
@@ -35,7 +35,7 @@ export function HomeSection() {
       </div>
 
       <h2 className="relative text-2xl uppercase tracking-[0.25rem] text-secondary-500">
-        Vão se Casar!
+        Vão Casar!
       </h2>
     </section>
   );
