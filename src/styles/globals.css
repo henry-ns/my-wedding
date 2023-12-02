@@ -10,3 +10,12 @@ h5,
 h6 {
   font-family: "var(--font-header)";
 }
+
+::-moz-selection {
+  /* Code for Firefox */
+  background: #acc9b280;
+}
+
+::selection {
+  background: #acc9b280;
+}

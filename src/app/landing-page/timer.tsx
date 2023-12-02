@@ -55,11 +55,11 @@ export function TimerSection() {
   return (
     <section
       id="timer"
-      className="z-10 flex min-h-screen items-center justify-center"
+      className="relative z-10 flex items-center justify-center py-40"
     >
-      <div className="top-0s absolute left-0 h-[50vh] w-20 translate-y-1/3 bg-primary-400/50" />
+      <div className="top-0s absolute left-0 h-[50%] w-20 translate-y-1/3 bg-primary-400/50" />
 
-      <div className="flex space-x-5">
+      <div className="grid grid-cols-2 gap-1 md:flex md:space-x-5">
         <TimerUnit label="dias" value={days} />
         <TimerUnit label="horas" value={hours} />
         <TimerUnit label="minutos" value={minutes} />
