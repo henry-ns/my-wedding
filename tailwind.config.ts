@@ -1,4 +1,4 @@
-import { type Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
@@ -13,6 +13,17 @@ export default {
         spin: {
           "0%": { transform: "rotate(45deg)" },
           "100%": { transform: "rotate(405deg)" },
+        },
+        "bounce-slow": {
+          "0%": {
+            transform: "translateY(0%)",
+          },
+          "50%": {
+            transform: "translateY(-10%)",
+          },
+          "100%": {
+            transform: "translateY(0%)",
+          },
         },
       },
       animation: {
