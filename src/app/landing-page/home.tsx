@@ -14,27 +14,29 @@ export function HomeSection() {
   return (
     <section
       id="home"
-      className="z-20 flex min-h-screen flex-col items-center justify-center overflow-hidden text-center"
+      className="relative z-20 flex min-h-screen flex-col items-center justify-center overflow-hidden text-center"
     >
-      <h3 className="relative z-10 text-3xl text-primary-600">{weddingDate}</h3>
+      <h3 className="relative z-20 text-2xl text-primary-600 md:text-3xl">
+        {weddingDate}
+      </h3>
 
-      <div className="a animate-spin border-[19px] border-primary-300">
+      <div className="a animate-spin border-8 border-primary-300 sm:border-[10px] md:border-[19px]">
         <Image
           alt="O Casal"
           src="/photo.png"
           width="286"
           height="286"
-          className="-rotate-45 animate-spin-reverse"
+          className="h-52 w-52 -rotate-45 animate-spin-reverse sm:h-56 sm:w-56 md:h-[286px] md:w-[286px]"
         />
       </div>
 
-      <div className="-ml-2 mb-4 border-b-4 border-b-secondary-300 px-4">
-        <h1 className="relative text-5xl font-bold tracking-widest text-gray-800">
+      <div className="-ml-2 mb-2 border-b-4 border-b-secondary-300 px-2 md:mb-4 md:px-4">
+        <h1 className="relative text-3xl font-bold tracking-widest text-gray-800 sm:text-4xl md:text-5xl">
           Henrique & Jennifer
         </h1>
       </div>
 
-      <h2 className="relative text-2xl uppercase tracking-[0.25rem] text-secondary-500">
+      <h2 className="relative text-xl uppercase tracking-[0.25rem] text-secondary-500 md:text-2xl">
         Vão Casar!
       </h2>
     </section>

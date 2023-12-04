@@ -57,7 +57,7 @@ export function TimerSection() {
       id="timer"
       className="relative z-10 flex items-center justify-center py-64"
     >
-      <div className="absolute left-0 top-0 h-[70%] w-20 translate-y-1/2 bg-primary-300/80" />
+      <div className="absolute left-0 top-0 h-[60%] w-5 translate-y-1/2 bg-primary-300/80 sm:w-10 md:w-20" />
 
       <div>
         <div className="grid grid-cols-2 gap-1 md:flex md:space-x-5">
