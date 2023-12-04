@@ -1,8 +1,11 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Image from "next/image";
+
 import { env } from "~/env";
-import { capitalizeString } from "../../utils/capitalize-string";
+import { capitalizeString } from "~/utils/capitalize-string";
+
+import { Button } from "./button";
 
 const weddingDate = capitalizeString(
   format(env.NEXT_PUBLIC_WEDDING_DATE, "eeee',' dd 'de' LLLL", {
@@ -39,6 +42,11 @@ export function HomeSection() {
       <h2 className="relative text-xl uppercase tracking-[0.25rem] text-secondary-500 md:text-2xl">
         Vão Casar!
       </h2>
+
+      <div className="mt-10 flex flex-col items-center justify-center space-y-6 md:flex-row md:space-x-8 md:space-y-0">
+        <Button color="primary">Confirmar Presença</Button>
+        <Button color="secondary">Lista de Presentes</Button>
+      </div>
     </section>
   );
 }
