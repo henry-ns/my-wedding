@@ -5,6 +5,7 @@ import Image from "next/image";
 import { env } from "~/env";
 import { capitalizeString } from "~/utils/capitalize-string";
 
+import Link from "next/link";
 import { Button } from "./button";
 
 const weddingDate = capitalizeString(
@@ -44,7 +45,9 @@ export function HomeSection() {
       </h2>
 
       <div className="mt-10 flex flex-col items-center justify-center space-y-6 md:flex-row md:space-x-8 md:space-y-0">
-        <Button color="primary">Confirmar Presença</Button>
+        <Link href="sign-in">
+          <Button color="primary">Confirmar Presença</Button>
+        </Link>
         <Button color="secondary">Lista de Presentes</Button>
       </div>
     </section>
