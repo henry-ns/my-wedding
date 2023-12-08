@@ -45,7 +45,7 @@ export function HomeSection() {
       </h2>
 
       <div className="mt-10 flex flex-col items-center justify-center space-y-6 md:flex-row md:space-x-8 md:space-y-0">
-        <Link href="sign-in">
+        <Link href="api/auth/signin">
           <Button color="primary">Confirmar Presença</Button>
         </Link>
         <Button color="secondary">Lista de Presentes</Button>

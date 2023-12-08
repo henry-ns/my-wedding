@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1702057961179,
+      "tag": "0000_open_elektra",
+      "breakpoints": true
+    }
+  ]
+}

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "db:push": "dotenv drizzle-kit push:mysql",
+    "db:push": "dotenv drizzle-kit push:sqlite",
+    "db:generate": "dotenv drizzle-kit generate:sqlite",
     "db:studio": "dotenv drizzle-kit studio",
     "dev": "next dev",
     "lint": "next lint",
@@ -18,7 +19,6 @@
     "date-fns": "^2.30.0",
     "drizzle-orm": "^0.29.1",
     "framer-motion": "^10.16.15",
-    "nanoid": "^5.0.4",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "react": "18.2.0",

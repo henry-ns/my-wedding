@@ -9,14 +9,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "~/env";
 import { db } from "~/server/db";
-import { createTable } from "~/server/db/schema";
 
-/**
- * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
- * object and keep type safety.
- *
- * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
- */
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
@@ -25,11 +18,6 @@ declare module "next-auth" {
   }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: ({ session, user }) => ({
@@ -40,7 +28,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
-  adapter: DrizzleAdapter(db, createTable),
+  adapter: DrizzleAdapter(db),
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
@@ -63,7 +51,7 @@ export const authOptions: NextAuthOptions = {
     //       type: "password",
     //     },
     //   },
-    //   async authorize(credentials, ) {
+    //   async authorize(credentials) {
     //     if (!credentials?.email || !credentials.password) {
     //       return null;
     //     }
