@@ -1,12 +1,14 @@
 import { relations } from "drizzle-orm";
 import {
-  sqliteTable as createTable,
   index,
   int,
   primaryKey,
+  sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
 import { type AdapterAccount } from "next-auth/adapters";
+
+export const createTable = sqliteTable;
 
 export const users = createTable("user", {
   id: text("id", { length: 255 }).notNull().primaryKey(),
