@@ -11,7 +11,17 @@ export const users = sqliteTable("user", {
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: integer("emailVerified", { mode: "timestamp_ms" }),
+  passwordHash: text("password_hash"),
   image: text("image"),
+});
+
+export const presences = sqliteTable("presence", {
+  id: text("id").notNull().primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  check: integer("check", { mode: "boolean" }).notNull().default(false),
+  checkedAt: integer("checked_at", { mode: "timestamp_ms" }).notNull(),
 });
 
 export const accounts = sqliteTable(

@@ -5,8 +5,7 @@ import Image from "next/image";
 import { env } from "~/env";
 import { capitalizeString } from "~/utils/capitalize-string";
 
-import Link from "next/link";
-import { Button } from "./button";
+import { HomeActions } from "./home-actions";
 
 const weddingDate = capitalizeString(
   format(env.NEXT_PUBLIC_WEDDING_DATE, "eeee',' dd 'de' LLLL", {
@@ -44,12 +43,7 @@ export function HomeSection() {
         Vão Casar!
       </h2>
 
-      <div className="mt-10 flex flex-col items-center justify-center space-y-6 md:flex-row md:space-x-8 md:space-y-0">
-        <Link href="api/auth/signin">
-          <Button color="primary">Confirmar Presença</Button>
-        </Link>
-        <Button color="secondary">Lista de Presentes</Button>
-      </div>
+      <HomeActions />
     </section>
   );
 }

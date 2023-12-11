@@ -4,12 +4,15 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
 
+import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
 import { env } from "~/env";
 import { db } from "~/server/db";
-
+import { users } from "./db/schema";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
@@ -28,52 +31,59 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
+  debug: env.NODE_ENV === "development",
   adapter: DrizzleAdapter(db),
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    // CredentialsProvider({
-    //   name: "Cadastrar",
-    //   credentials: {
-    //     email: {
-    //       label: "Email",
-    //       type: "email",
-    //       placeholder: "exemplo@email.com",
-    //     },
-    //     password: {
-    //       label: "Password",
-    //       type: "password",
-    //     },
-    //   },
-    //   async authorize(credentials) {
-    //     if (!credentials?.email || !credentials.password) {
-    //       return null;
-    //     }
+    CredentialsProvider({
+      name: "Cadastrar",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "exemplo@email.com",
+        },
+        password: {
+          label: "Senha",
+          type: "password",
+        },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) {
+          throw new Error("Preencha o formulário");
+        }
 
-    //     const user = await db
-    //       .select()
-    //       .from(users)
-    //       .where(eq(users.email, credentials.email));
+        const user = await db
+          .select()
+          .from(users)
+          .where(eq(users.email, credentials.email))
+          .get();
 
-    //     if (!user) {
-    //       return null;
-    //     }
+        if (!user?.passwordHash) {
+          throw new Error("Utilize o mesmo método de autenticação");
+        }
 
-    //     return user;
-    //   },
-    // }),
+        const isPasswordCorrect = await bcrypt.compare(
+          credentials.password,
+          user.passwordHash,
+        );
+
+        if (!isPasswordCorrect) {
+          throw new Error("Email e senha não correspondem");
+        }
+
+        return user;
+      },
+    }),
   ],
 };
 
-/**
- * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
- *
- * @see https://next-auth.js.org/configuration/nextjs
- */
 export const getServerAuthSession = () => getServerSession(authOptions);
