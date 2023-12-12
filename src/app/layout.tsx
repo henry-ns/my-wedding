@@ -26,7 +26,7 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="pt-br">
+    <html lang="pt">
       <body
         className={`bg-bg font-sans ${bodyFont.variable} ${headingFont.variable}`}
       >

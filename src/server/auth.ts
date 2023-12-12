@@ -8,11 +8,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { users } from "./db/schema";
+
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {

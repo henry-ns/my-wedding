@@ -4,6 +4,7 @@ type Props = Omit<SVGProps<SVGSVGElement>, "children">;
 
 export function LocationShape(props: Props) {
   return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
     <svg
       fill="none"
       viewBox="0 0 1280 769"

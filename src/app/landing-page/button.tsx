@@ -44,7 +44,7 @@ export function Button({
 
   return (
     <div className={container()}>
-      <button className={button()} onClick={onClick}>
+      <button type="button" className={button()} onClick={onClick}>
         {isLoading && (
           <UpdateIcon className="mr-2 animate-[spin_1s_linear_infinite]" />
         )}

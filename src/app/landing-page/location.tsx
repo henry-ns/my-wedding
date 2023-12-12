@@ -34,6 +34,7 @@ export function LocationSection() {
 
         <div className="relative mr-10 flex-1 md:mr-0">
           <iframe
+            title="Mapa do local"
             src={env.NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL}
             loading="lazy"
             allowFullScreen
