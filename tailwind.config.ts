@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
-export default {
+export default ({
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
@@ -62,8 +62,21 @@ export default {
           "900": "#5b4142",
           "950": "#2f2021",
         },
+        discord: {
+          "50": "#f1f5fc",
+          "100": "#e5eefa",
+          "200": "#cfdff6",
+          "300": "#b2c9ef",
+          "400": "#93ace6",
+          "500": "#7289da",
+          "600": "#5e6ecd",
+          "700": "#4e5ab4",
+          "800": "#414c92",
+          "900": "#3a4375",
+          "950": "#222744",
+        },
       },
     },
   },
   plugins: [],
-} satisfies Config;
+} satisfies Config);
