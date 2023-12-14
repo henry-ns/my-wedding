@@ -1,0 +1,19 @@
+diff --git a/node_modules/@libsql/isomorphic-fetch/package.json b/node_modules/@libsql/isomorphic-fetch/package.json
+index 7229ed0..95bbef6 100644
+--- a/node_modules/@libsql/isomorphic-fetch/package.json
++++ b/node_modules/@libsql/isomorphic-fetch/package.json
+@@ -9,12 +9,10 @@
+     "directory": "isomorphic-fetch"
+   },
+   "homepage": "https://github.com/libsql/isomorphic-ts/tree/main/isomorphic-fetch",
+-  "authors": [
+-    "Jan Špaček <honza@chiselstrike.com>"
+-  ],
++  "authors": ["Jan Špaček <honza@chiselstrike.com>"],
+   "license": "MIT",
+   "type": "module",
+-  "main": "node.cjs",
++  "main": "node.js",
+   "types": "index.d.ts",
+   "exports": {
+     ".": {

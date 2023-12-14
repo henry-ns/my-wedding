@@ -1,5 +1,6 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import {
+  Session,
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
@@ -11,6 +12,7 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
+import { redirect } from "next/navigation";
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { users } from "./db/schema";
@@ -99,3 +101,15 @@ export const authOptions: NextAuthOptions = {
 };
 
 export const getServerAuthSession = () => getServerSession(authOptions);
+
+export async function requireAuthentication(
+  redirectTo?: string,
+): Promise<Session> {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect(redirectTo ? `/sign-in?${redirectTo}` : "/sign-in");
+  }
+
+  return session;
+}

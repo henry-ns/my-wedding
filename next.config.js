@@ -23,12 +23,7 @@ const config = {
       },
     ],
   },
-  transpilePackages: [
-    "node-fetch",
-    "@libsql/client",
-    "@libsql/isomorphic-fetch",
-    "nanoid",
-  ],
+  transpilePackages: ["@libsql/isomorphic-fetch", "nanoid"],
 };
 
 export default config;
