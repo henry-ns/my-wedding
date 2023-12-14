@@ -1,4 +1,4 @@
 {
-	"cSpell.words": ["signin"],
-	"editor.defaultFormatter": "biomejs.biome"
+  "cSpell.words": ["biomejs", "signin"],
+  "editor.defaultFormatter": "biomejs.biome"
 }
