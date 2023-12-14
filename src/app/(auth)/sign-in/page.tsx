@@ -1,10 +1,18 @@
 import Image from "next/image";
 
+import { redirect } from "next/navigation";
+import { getServerAuthSession } from "../../../server/auth";
 import { CredentialSignInForm } from "../credential-sign-in-form";
 import { DiscordSignInButton } from "../discord-sign-in-button";
 import { GoogleSignInButton } from "../google-sign-in-button";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await getServerAuthSession();
+
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <main className="relative min-h-screen text-gray-900 bg-bg flex items-center justify-center">
       <div className="bg-primary-100 p-8 shadow-sm rounded-lg flex flex-col items-center">

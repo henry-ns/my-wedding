@@ -10,6 +10,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
+
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { users } from "./db/schema";
@@ -24,16 +25,20 @@ declare module "next-auth" {
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    async session({ session, token }) {
+      if (token.sub) {
+        session.user.id = token.sub;
+      }
+
+      return session;
+    },
   },
   debug: env.NODE_ENV === "development",
   adapter: DrizzleAdapter(db),
+  secret: env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
@@ -43,6 +48,7 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       name: "Cadastrar",
@@ -81,7 +87,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email e senha não correspondem");
         }
 
-        return user;
+        return {
+          id: user.id,
+          email: user.email,
+          image: user.image,
+          name: user.name,
+        };
       },
     }),
   ],

@@ -19,7 +19,8 @@ export function Avatar({ src, alt }: Props) {
         alt={alt}
         width={80}
         height={80}
-        className="h-14 w-14 rounded-full border-4 border-secondary-400 transition-all"
+        priority={false}
+        className="h-auto w-14 rounded-full border-4 border-secondary-400 transition-all"
         transition={{ duration: 0.1, type: "spring", stiffness: 1000 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

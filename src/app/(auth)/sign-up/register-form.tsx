@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useTransition } from "react";
+import { useEffect } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import { tv } from "tailwind-variants";
-import { Input } from "./input";
+import { Input } from "../input";
+import { signUp } from "./actions";
 
 const buttonStyle = tv({
   base: `
@@ -23,35 +24,29 @@ const buttonStyle = tv({
   },
 });
 
-export function CredentialSignInForm() {
-  const [pending, startTransition] = useTransition();
+export function RegisterForm() {
+  const [state, formAction] = useFormState(signUp, {});
+  const { pending } = useFormStatus();
   const router = useRouter();
 
-  function login(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  useEffect(() => {
+    if (state.success) {
+      router.back();
+    }
 
-    startTransition(async () => {
-      try {
-        const response = await signIn("credentials", {
-          email: formData.get("email")?.toString(),
-          password: formData.get("password")?.toString(),
-          redirect: false,
-        });
-
-        if (!response?.error) {
-          router.push("/");
-          router.refresh();
-        }
-      } catch (e) {
-        // TODO display errors
-        console.log(e);
-      }
-    });
-  }
+    // TODO display errors
+  }, [router, state.success]);
 
   return (
-    <form onSubmit={login} className="flex flex-col w-full">
+    <form action={formAction} className="flex flex-col w-full">
+      <Input
+        label="Nome"
+        name="name"
+        placeholder="Seu nome completo"
+        className="mb-2"
+        mask="Capitalize"
+        isRequired
+      />
       <Input
         label="Email"
         name="email"
@@ -73,10 +68,10 @@ export function CredentialSignInForm() {
       </button>
 
       <Link
-        href="/sign-up"
+        href="/sign-in"
         className="w-full text-center text-gray-500 hover:underline"
       >
-        Criar conta com email e senha
+        Voltar
       </Link>
     </form>
   );

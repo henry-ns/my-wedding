@@ -4,6 +4,8 @@ import { Avatar } from "./avatar";
 export async function GuestInfo() {
   const session = await getServerAuthSession();
 
+  console.log({ session });
+
   if (!session) {
     return null;
   }

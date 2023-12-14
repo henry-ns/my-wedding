@@ -7,6 +7,7 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -26,6 +27,7 @@ const config = {
     "node-fetch",
     "@libsql/client",
     "@libsql/isomorphic-fetch",
+    "nanoid",
   ],
 };
 

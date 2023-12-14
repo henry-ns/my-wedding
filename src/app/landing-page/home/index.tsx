@@ -29,7 +29,8 @@ export function HomeSection() {
           src="/photo.png"
           width="286"
           height="286"
-          className="h-52 w-52 -rotate-45 animate-spin-reverse sm:h-56 sm:w-56 md:h-[286px] md:w-[286px]"
+          className="h-auto w-52 -rotate-45 animate-spin-reverse sm:h-56 sm:w-56 md:h-[286px] md:w-[286px]"
+          priority
         />
       </div>
 

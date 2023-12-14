@@ -39,6 +39,6 @@
     "**/*.js",
     ".next/types/**/*.ts",
     "next.config.js"
-  ],
+, "src/app/(auth)/sign-up/actions.tsx"  ],
   "exclude": ["node_modules"]
 }

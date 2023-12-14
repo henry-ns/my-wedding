@@ -15,6 +15,13 @@
       "when": 1702251720303,
       "tag": "0001_tearful_jasper_sitwell",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702560067834,
+      "tag": "0002_tricky_spyke",
+      "breakpoints": true
     }
   ]
 }
