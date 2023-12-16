@@ -3,6 +3,9 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    CONTENTFUL_ACCESS_TOKEN: z.string(),
+    CONTENTFUL_SPACE_ID: z.string(),
+
     DATABASE_URL: z
       .string()
       .url()
@@ -39,13 +42,20 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    NODE_ENV: process.env.NODE_ENV,
+
+    CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+
     DATABASE_URL: process.env.DATABASE_URL,
     DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,
-    NODE_ENV: process.env.NODE_ENV,
+
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+
     GOOGLE_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
 
