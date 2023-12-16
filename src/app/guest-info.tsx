@@ -1,7 +1,11 @@
 import { getServerAuthSession } from "../server/auth";
 import { Avatar } from "./avatar";
 
-export async function GuestInfo() {
+type Props = {
+  className?: string;
+};
+
+export async function GuestInfo({ className }: Props) {
   const session = await getServerAuthSession();
 
   if (!session) {
@@ -10,6 +14,7 @@ export async function GuestInfo() {
 
   return (
     <Avatar
+      className={className}
       src={session.user.image ?? "https://api.dicebear.com/7.x/pixel-art/svg"}
       alt={session.user.name ?? "convidado"}
     />
