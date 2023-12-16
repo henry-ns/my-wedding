@@ -31,6 +31,7 @@ type Props = VariantProps<typeof styles> & {
   onClick?: () => void;
   isLoading?: boolean;
   loadingText?: string;
+  className?: string;
 };
 
 export function Button({
@@ -39,11 +40,12 @@ export function Button({
   onClick,
   isLoading,
   loadingText,
+  className,
 }: Props) {
   const { button, container } = styles({ color, isLoading });
 
   return (
-    <div className={container()}>
+    <div className={container({ className })}>
       <button type="button" className={button()} onClick={onClick}>
         {isLoading && (
           <UpdateIcon className="mr-2 animate-[spin_1s_linear_infinite]" />
