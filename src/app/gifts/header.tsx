@@ -1,5 +1,6 @@
 import { HomeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+
 import { GuestInfo } from "../guest-info";
 
 export function Header() {

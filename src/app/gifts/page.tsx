@@ -1,5 +1,6 @@
-import { Pagination } from "../../ui/pagination";
-import { getGifts } from "./get-gifts";
+import { getGifts } from "~/server/services/gifts";
+import { Pagination } from "~/ui/pagination";
+
 import { GiftCard } from "./gift-card";
 import { GiftFilter } from "./gift-filter";
 import { Header } from "./header";

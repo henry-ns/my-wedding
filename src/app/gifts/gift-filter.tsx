@@ -4,7 +4,8 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { tv } from "tailwind-variants";
-import { useDebouncedCallback } from "./use-debounce";
+
+import { useDebouncedCallback } from "~/hooks/use-debounce";
 
 const styles = tv({
   slots: {
