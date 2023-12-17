@@ -44,6 +44,7 @@ export function HomeSection() {
         Vão Casar!
       </h2>
 
+      {/* TODO add lazy loading */}
       <HomeActions />
     </section>
   );

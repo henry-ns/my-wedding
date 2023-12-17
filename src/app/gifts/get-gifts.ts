@@ -15,21 +15,19 @@ type Output = {
 };
 
 type Input = {
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
   price?: number;
   name?: string;
 };
 
-export async function getGifts({
-  page = 1,
-  limit = 10,
-}: Input): Promise<Output> {
+export async function getGifts({ page, limit, name }: Input): Promise<Output> {
   try {
     const response = await contentful.getEntries({
-      content_type: "weddingGift",
       limit,
       skip: limit * (page - 1),
+      content_type: "weddingGift",
+      "fields.name[match]": name,
     });
 
     const { skip, total, items } = response;

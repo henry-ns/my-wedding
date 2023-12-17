@@ -1,7 +1,16 @@
-import { GuestInfo } from "./guest-info";
+import dynamic from "next/dynamic";
 import { HomeSection } from "./landing-page/home";
 import { LocationSection } from "./landing-page/location";
 import { TimerSection } from "./landing-page/timer";
+
+const GuestInfo = dynamic(
+  () => import("./guest-info").then((mod) => mod.GuestInfo),
+  {
+    loading: () => (
+      <div className="fixed right-2 top-2 w-14 h-14 rounded-full animate-pulse bg-gray-300" />
+    ),
+  },
+);
 
 export default function LandingPage() {
   return (
