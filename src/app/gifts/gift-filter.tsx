@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { tv } from "tailwind-variants";
 
-import { useDebouncedCallback } from "~/hooks/use-debounce";
+import { useDebouncedCallback } from "~/hooks/debounce";
 
 const styles = tv({
   slots: {

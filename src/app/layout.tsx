@@ -2,6 +2,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Lato, Libre_Baskerville } from "next/font/google";
 
 import "~/styles/globals.css";
+import { ToastProvider } from "~/ui/toast";
 
 const headingFont = Libre_Baskerville({
   weight: ["400", "700"],
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: Props) {
         className={`bg-bg font-sans ${bodyFont.variable} ${headingFont.variable}`}
       >
         <SpeedInsights />
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );

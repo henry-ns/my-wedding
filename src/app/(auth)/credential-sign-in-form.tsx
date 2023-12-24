@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useTransition } from "react";
 import { tv } from "tailwind-variants";
+import { useToast } from "../../ui/toast";
 import { Input } from "./input";
 
 const buttonStyle = tv({
@@ -26,6 +27,7 @@ const buttonStyle = tv({
 export function CredentialSignInForm() {
   const [pending, startTransition] = useTransition();
   const router = useRouter();
+  const toast = useToast();
 
   function login(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,13 +41,20 @@ export function CredentialSignInForm() {
           redirect: false,
         });
 
-        if (!response?.error) {
-          router.push("/");
-          router.refresh();
+        if (response?.error) {
+          throw new Error(response.error);
         }
+
+        router.push("/");
+        router.refresh();
       } catch (e) {
-        // TODO display errors
-        console.log(e);
+        console.error(e);
+        toast.show({
+          status: "error",
+          title: "Não foi possível entrar",
+          description: "Verifique seus dados ou tente outra conta",
+          duration: 3000,
+        });
       }
     });
   }

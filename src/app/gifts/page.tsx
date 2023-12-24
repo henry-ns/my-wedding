@@ -1,8 +1,8 @@
 import { getGifts } from "~/server/services/gifts";
 import { Pagination } from "~/ui/pagination";
 
-import { GiftCard } from "./gift-card";
 import { GiftFilter } from "./gift-filter";
+import { GiftList } from "./gift-list";
 import { Header } from "./header";
 
 type Props = {
@@ -26,12 +26,7 @@ export default async function GiftsPage({ searchParams }: Props) {
 
       <main className="p-8 max-w-7xl w-full mx-auto">
         <GiftFilter />
-
-        <div className="flex justify-start items-start flex-wrap gap-6">
-          {gifts.items.map((g) => (
-            <GiftCard key={g.slug} gift={g} />
-          ))}
-        </div>
+        <GiftList gifts={gifts.items} />
 
         <Pagination
           currentPage={gifts.meta.currentPage}

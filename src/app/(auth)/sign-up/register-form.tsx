@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { tv } from "tailwind-variants";
+
+import { useToast } from "~/ui/toast";
 import { Input } from "../input";
 import { signUp } from "./actions";
 
@@ -28,14 +29,27 @@ export function RegisterForm() {
   const [state, formAction] = useFormState(signUp, {});
   const { pending } = useFormStatus();
   const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     if (state.success) {
       router.back();
+      toast.show({
+        status: "positive",
+        title: "Conta criada com sucesso",
+        description: "Agora só entrar com os dados cadastrados",
+      });
+      return;
     }
 
-    // TODO display errors
-  }, [router, state.success]);
+    if (state.success === false) {
+      toast.show({
+        status: "error",
+        title: "Não foi possível criar sua conta",
+        description: "Verifique seus dados e tente novamente",
+      });
+    }
+  }, [toast, router, state]);
 
   return (
     <form action={formAction} className="flex flex-col w-full">
