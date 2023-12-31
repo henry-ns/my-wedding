@@ -3,6 +3,10 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    STRIPE_SECRET_KEY: z.string(),
+
+    MERCADOPAGO_ACCESS_TOKEN: z.string(),
+
     CONTENTFUL_ACCESS_TOKEN: z.string(),
     CONTENTFUL_SPACE_ID: z.string(),
 
@@ -35,6 +39,8 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL: z.string(),
     NEXT_PUBLIC_WEDDING_DATE: z.string().transform((v) => new Date(v)),
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
+    NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY: z.string(),
   },
 
   /**
@@ -43,6 +49,14 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+
+    MERCADOPAGO_ACCESS_TOKEN: process.env.MERCADOPAGO_ACCESS_TOKEN,
+    NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY:
+      process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY,
+
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 
     CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,
     CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,

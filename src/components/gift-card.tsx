@@ -1,8 +1,9 @@
-import { CheckIcon } from "@radix-ui/react-icons";
+"use client";
 
+import { CheckIcon } from "@radix-ui/react-icons";
 import { Gift } from "~/types/gift";
-import { Button } from "~/ui/button";
 import { formatCentsToCurrency } from "~/utils/format-currency";
+import { Button } from "./ui/button";
 
 type Props = {
   gift: Gift;
@@ -13,12 +14,7 @@ export function GiftCard({ gift, onSelect }: Props) {
   const [image] = gift.images;
 
   return (
-    <button
-      type="button"
-      key={gift.slug}
-      className="grow flex-1 group border-4 p-4 rounded-xl min-w-[220px] max-w-lg border-gray-200 w-full hover:border-primary-500 transition-all"
-      onClick={() => onSelect(gift)}
-    >
+    <div className="grow flex-1 group border-4 p-4 rounded-xl min-w-[220px] max-w-lg border-gray-200 w-full hover:border-primary-500 transition-all">
       <img
         alt={image?.fields.title}
         src={image?.fields.file.url}
@@ -30,10 +26,13 @@ export function GiftCard({ gift, onSelect }: Props) {
         <span className="font-bold text-2xl text-primary-500">
           {formatCentsToCurrency(gift.priceInCents)}
         </span>
-        <Button className="bg-primary-500 text-white rounded-lg w-10 p-0">
+        <Button
+          className="bg-primary-500 text-white rounded-lg w-10 p-0"
+          onClick={() => onSelect(gift)}
+        >
           <CheckIcon className="stroke-white w-8 h-8 p-1.5" />
         </Button>
       </div>
-    </button>
+    </div>
   );
 }

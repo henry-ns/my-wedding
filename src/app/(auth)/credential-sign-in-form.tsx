@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useTransition } from "react";
 import { tv } from "tailwind-variants";
-import { useToast } from "../../ui/toast";
+import { useToast } from "../../components/ui/toast";
 import { Input } from "./input";
 
 const buttonStyle = tv({

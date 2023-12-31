@@ -1,9 +1,8 @@
+import { Pagination } from "~/components/ui/pagination";
 import { getGifts } from "~/server/services/gifts";
-import { Pagination } from "~/ui/pagination";
 
-import { GiftFilter } from "./gift-filter";
-import { GiftList } from "./gift-list";
-import { Header } from "./header";
+import { GiftList } from "~/components/gift-list";
+import { GiftFilter } from "../../components/gift-filter";
 
 type Props = {
   searchParams: {
@@ -21,20 +20,16 @@ export default async function GiftsPage({ searchParams }: Props) {
   });
 
   return (
-    <div className="flex flex-col overflow-hidden">
-      <Header />
+    <>
+      <GiftFilter />
+      <GiftList gifts={gifts.items} />
 
-      <main className="p-8 max-w-7xl w-full mx-auto">
-        <GiftFilter />
-        <GiftList gifts={gifts.items} />
-
-        <Pagination
-          currentPage={gifts.meta.currentPage}
-          pageLimit={gifts.meta.itemsPerPage}
-          totalPages={gifts.meta.totalPages}
-          totalItems={gifts.meta.totalItems}
-        />
-      </main>
-    </div>
+      <Pagination
+        currentPage={gifts.meta.currentPage}
+        pageLimit={gifts.meta.itemsPerPage}
+        totalPages={gifts.meta.totalPages}
+        totalItems={gifts.meta.totalItems}
+      />
+    </>
   );
 }

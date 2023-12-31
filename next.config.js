@@ -21,6 +21,12 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.ctfassets.net",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   transpilePackages: ["@libsql/isomorphic-fetch", "nanoid"],

@@ -1,8 +1,8 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Lato, Libre_Baskerville } from "next/font/google";
 
+import { ToastProvider } from "~/components/ui/toast";
 import "~/styles/globals.css";
-import { ToastProvider } from "~/ui/toast";
 
 const headingFont = Libre_Baskerville({
   weight: ["400", "700"],
