@@ -1,8 +1,8 @@
 import { Pagination } from "~/components/ui/pagination";
-import { getGifts } from "~/server/services/gifts";
+import { getAvailableGifts } from "~/server/services/gifts";
 
-import { GiftList } from "~/components/gift-list";
-import { GiftFilter } from "../../components/gift-filter";
+import { GiftList } from "~/app/(shopping)/gifts/gift-list";
+import { GiftFilter } from "./gift-filter";
 
 type Props = {
   searchParams: {
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default async function GiftsPage({ searchParams }: Props) {
-  const gifts = await getGifts({
+  const gifts = await getAvailableGifts({
     page: Number(searchParams.page?.toString() || "1"),
     limit: Number(searchParams.limit?.toString() || "10"),
     name: searchParams.search?.toString(),

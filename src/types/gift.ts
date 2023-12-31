@@ -2,7 +2,7 @@ export type Gift = {
   slug: string;
   name: string;
   priceInCents: number;
-  buyerId?: string;
+  available: boolean;
   images: Array<{
     fields: {
       title: string;

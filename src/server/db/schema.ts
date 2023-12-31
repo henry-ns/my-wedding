@@ -24,6 +24,17 @@ export const presences = sqliteTable("presence", {
   checkedAt: integer("checked_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+export const gifts = sqliteTable("gift", {
+  id: text("id").notNull().primaryKey(),
+  slug: text("slug").notNull(),
+  name: text("name").notNull(),
+  unitPrice: integer("unit_price").notNull(),
+  imageUrl: text("image").notNull(),
+  buyerId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+});
+
 export const accounts = sqliteTable(
   "account",
   {

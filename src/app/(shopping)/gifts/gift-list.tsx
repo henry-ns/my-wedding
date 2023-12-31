@@ -8,6 +8,7 @@ type Props = {
 };
 
 export function GiftList({ gifts }: Props) {
+  console.log({ gifts });
   return (
     <div className="flex justify-start items-start flex-wrap gap-6">
       {gifts.map((g) => (

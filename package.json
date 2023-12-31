@@ -24,6 +24,7 @@
     "@vercel/speed-insights": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "contentful": "^10.6.15",
+    "contentful-management": "^11.7.3",
     "date-fns": "^3.0.6",
     "drizzle-orm": "^0.29.2",
     "framer-motion": "^10.16.16",

@@ -1,12 +1,19 @@
 "use client";
 
-import { atom, useAtomValue, useSetAtom } from "jotai";
+import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { Gift } from "~/types/gift";
 
-const STORAGE_KEY = "jh-cart";
+type PreferenceAtom = {
+  state: "loaded" | "outdated" | "loading" | "error";
+  preferenceId?: string;
+};
 
-const cartItemsAtom = atomWithStorage<Gift[]>(STORAGE_KEY, []);
+const cartItemsAtom = atomWithStorage<Gift[]>("jh-cart-items", []);
+
+const preferenceIdAtom = atomWithStorage<PreferenceAtom>("jh-cart-preference", {
+  state: "loading",
+});
 
 const totalCartItemsAtom = atom((get) => {
   return get(cartItemsAtom).length;
@@ -18,21 +25,30 @@ const addToCartAtom = atom(null, (get, set, payload: Gift) => {
   }
 
   set(cartItemsAtom, (card) => [payload, ...card]);
+  set(preferenceIdAtom, { state: "outdated" });
 });
 
 const removeFromCartAtom = atom(null, (_, set, slug: string) => {
   set(cartItemsAtom, (card) => card.filter((i) => i.slug !== slug));
+  set(preferenceIdAtom, { state: "outdated" });
+});
+
+const cleanCartAtom = atom(null, (_, set) => {
+  set(cartItemsAtom, []);
+  set(preferenceIdAtom, { state: "outdated" });
 });
 
 export function useCart() {
   const items = useAtomValue(cartItemsAtom);
   const totalPrice = items.reduce((acc, i) => acc + i.priceInCents, 0);
   const remove = useSetAtom(removeFromCartAtom);
+  const clean = useSetAtom(cleanCartAtom);
 
   return {
     items,
     totalPrice,
     remove,
+    clean,
   };
 }
 
@@ -60,4 +76,8 @@ export function useCartItem(gift: Gift) {
     toggle,
     isOnCard,
   };
+}
+
+export function usePreferenceId() {
+  return useAtom(preferenceIdAtom);
 }

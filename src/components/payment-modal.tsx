@@ -7,7 +7,7 @@ import { tv } from "tailwind-variants";
 import { Button } from "~/components/ui/button";
 import { Gift } from "~/types/gift";
 import { formatCentsToCurrency } from "~/utils/format-currency";
-import { checkout } from "../server/services/checkout";
+import { checkout } from "../server/services/preference";
 
 type Props = {
   gift?: Gift;

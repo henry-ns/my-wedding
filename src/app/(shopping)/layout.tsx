@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 
-import { Header } from "../../components/header";
+import { Header } from "./header";
 
 type Props = {
   children: ReactNode;
 };
 
-export default async function GiftsLayout({ children }: Props) {
+export default async function ShoppingLayout({ children }: Props) {
   return (
     <div className="flex flex-col overflow-hidden">
       <Header />

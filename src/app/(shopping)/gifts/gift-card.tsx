@@ -6,7 +6,7 @@ import { useCartItem } from "~/hooks/cart.ts";
 import { Gift } from "~/types/gift";
 import { formatCentsToCurrency } from "~/utils/format-currency";
 
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 
 type Props = {
   gift: Gift;
@@ -31,7 +31,7 @@ export function GiftCard({ gift }: Props) {
           {formatCentsToCurrency(gift.priceInCents)}
         </span>
         <Button
-          variant={cardItem.isOnCard ? "dangerous" : "primary"}
+          variant={cardItem.isOnCard ? "secondary" : "primary"}
           className="rounded-lg w-10 p-0"
           onClick={cardItem.toggle}
         >

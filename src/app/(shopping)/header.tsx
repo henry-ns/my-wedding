@@ -1,8 +1,8 @@
 import { HomeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
-import { GuestInfo } from "../app/guest-info";
-import { CartButton } from "./cart-button";
+import { CartButton } from "../../components/cart-button";
+import { GuestInfo } from "../guest-info";
 
 export function Header() {
   return (
