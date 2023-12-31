@@ -2,6 +2,7 @@ import { HomeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 import { GuestInfo } from "../app/guest-info";
+import { CartButton } from "./cart-button";
 
 export function Header() {
   return (
@@ -10,11 +11,12 @@ export function Header() {
         <div className="max-w-7xl mx-auto w-ful flex items-center justify-between py-3 px-8">
           <Link
             href="/"
-            className="-ml-1 hover:bg-gray-200/30 p-1 transition-all hover:scale-110 active:scale-95 rounded-md"
+            className="-ml-2 hover:bg-gray-200/30 p-2 transition-all hover:scale-110 active:scale-95 rounded-md"
           >
-            <HomeIcon className="w-auto h-10 text-white" />
+            <HomeIcon className="w-auto h-8 text-white" />
           </Link>
 
+          <CartButton />
           <GuestInfo />
         </div>
       </div>

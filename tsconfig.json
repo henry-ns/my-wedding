@@ -39,6 +39,6 @@
     "**/*.js",
     ".next/types/**/*.ts",
     "next.config.js"
-, "src/app/(auth)/sign-up/actions.tsx"  ],
+, "src/app/(auth)/sign-up/actions.tsx", "src/hooks/cardtts"  ],
   "exclude": ["node_modules"]
 }

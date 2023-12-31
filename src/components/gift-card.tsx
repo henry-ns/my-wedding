@@ -1,16 +1,20 @@
 "use client";
 
-import { CheckIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
+
+import { useCartItem } from "~/hooks/cart.ts";
 import { Gift } from "~/types/gift";
 import { formatCentsToCurrency } from "~/utils/format-currency";
+
 import { Button } from "./ui/button";
 
 type Props = {
   gift: Gift;
-  onSelect: (g: Gift) => void;
 };
 
-export function GiftCard({ gift, onSelect }: Props) {
+export function GiftCard({ gift }: Props) {
+  const cardItem = useCartItem(gift);
+
   const [image] = gift.images;
 
   return (
@@ -27,10 +31,15 @@ export function GiftCard({ gift, onSelect }: Props) {
           {formatCentsToCurrency(gift.priceInCents)}
         </span>
         <Button
-          className="bg-primary-500 text-white rounded-lg w-10 p-0"
-          onClick={() => onSelect(gift)}
+          variant={cardItem.isOnCard ? "dangerous" : "primary"}
+          className="rounded-lg w-10 p-0"
+          onClick={cardItem.toggle}
         >
-          <CheckIcon className="stroke-white w-8 h-8 p-1.5" />
+          {cardItem.isOnCard ? (
+            <Cross2Icon className="stroke-white w-8 h-8 p-1.5" />
+          ) : (
+            <CheckIcon className="stroke-white w-8 h-8 p-1.5" />
+          )}
         </Button>
       </div>
     </div>

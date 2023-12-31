@@ -26,16 +26,7 @@ const styles = tv({
         "hover:bg-primary-600",
         "active:bg-primary-700",
       ],
-      dangerous: [
-        "bg-dangerous-500",
-        "hover:bg-dangerous-600",
-        "active:bg-dangerous-700",
-      ],
-      positive: [
-        "bg-positive-500",
-        "hover:bg-positive-600",
-        "active:bg-positive-700",
-      ],
+      dangerous: ["bg-red-500", "hover:bg-red-600", "active:bg-red-700"],
     },
     fullWidth: {
       true: "w-full",
