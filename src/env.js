@@ -3,8 +3,6 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    STRIPE_SECRET_KEY: z.string(),
-
     MERCADOPAGO_ACCESS_TOKEN: z.string(),
 
     CONTENTFUL_ACCESS_TOKEN: z.string(),
@@ -22,6 +20,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+
     NEXTAUTH_SECRET: z.string(),
     NEXTAUTH_URL: z.preprocess(
       // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
@@ -30,8 +29,10 @@ export const env = createEnv({
       // VERCEL_URL doesn't include `https` so it cant be validated as a URL
       process.env.VERCEL ? z.string() : z.string().url(),
     ),
+
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
+
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
   },
@@ -39,7 +40,6 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL: z.string(),
     NEXT_PUBLIC_WEDDING_DATE: z.string().transform((v) => new Date(v)),
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
     NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY: z.string(),
   },
 
@@ -53,10 +53,6 @@ export const env = createEnv({
     MERCADOPAGO_ACCESS_TOKEN: process.env.MERCADOPAGO_ACCESS_TOKEN,
     NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY:
       process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY,
-
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 
     CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,
     CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
