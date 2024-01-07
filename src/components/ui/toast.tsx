@@ -30,20 +30,20 @@ const styles = tv({
   variants: {
     status: {
       info: {
-        root: "bg-info-200 border-info-300",
-        title: "text-info-800",
+        root: "bg-blue-200 border-blue-300",
+        title: "text-blue-800",
       },
       warning: {
-        root: "bg-warning-200 border-warning-300",
-        title: "text-warning-800",
+        root: "bg-orange-200 border-orange-300",
+        title: "text-orange-800",
       },
       error: {
-        root: "bg-dangerous-200 border-dangerous-300",
-        title: "text-dangerous-800",
+        root: "bg-red-200 border-red-300",
+        title: "text-red-800",
       },
       positive: {
-        root: "bg-positive-200 border-positive-300",
-        title: "text-positive-800",
+        root: "bg-green-200 border-green-300",
+        title: "text-green-800",
       },
     },
   },

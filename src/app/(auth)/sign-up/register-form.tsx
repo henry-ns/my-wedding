@@ -7,7 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { tv } from "tailwind-variants";
 
 import { useToast } from "~/components/ui/toast";
-import { Input } from "../input";
+import { Input } from "../../../components/ui/input";
 import { signUp } from "./actions";
 
 const buttonStyle = tv({

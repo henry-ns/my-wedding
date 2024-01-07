@@ -27,16 +27,21 @@ declare module "next-auth" {
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    async session({ session, token }) {
+    async session({ session, token, trigger, newSession }) {
       if (token.sub) {
         session.user.id = token.sub;
+      }
+
+      if (trigger === "update" && newSession?.name) {
+        session.user.name = newSession.name;
       }
 
       return session;
     },
   },
   debug: env.NODE_ENV === "development",
-  adapter: DrizzleAdapter(db),
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  adapter: DrizzleAdapter(db) as any,
   secret: env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",

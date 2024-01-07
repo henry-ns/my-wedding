@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { setPresence, type Presence } from "../../../server/services/presences";
+
+import { setPresence, type Presence } from "~/server/services/presences";
 import { Button } from "../button";
 
 type Props = {

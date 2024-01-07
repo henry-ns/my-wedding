@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import { contentful } from "~/server/contentful";
 import { Gift } from "~/types/gift";
 
+import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { gifts } from "../db/schema";
 
@@ -114,4 +115,8 @@ export async function buyGifts({ items, userId }: BuyGiftsInput) {
       imageUrl: `https:${i.images[0]?.fields.file.url}`,
     })),
   );
+}
+
+export async function getUserGifts(userId: string) {
+  return db.select().from(gifts).where(eq(gifts.buyerId, userId));
 }
