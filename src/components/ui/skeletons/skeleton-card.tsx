@@ -8,7 +8,7 @@ export function SkeletonCard({
   return (
     <div
       className={twMerge(
-        "h-20 animate-pulse bg-gray-200 grow flex-1 group rounded-xl min-w-[220px] max-w-l w-ful",
+        "h-20 animate-pulse bg-gray-200 grow flex-1 group rounded-xl min-w-[220px] w-full",
         className,
       )}
       {...rest}
