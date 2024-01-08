@@ -88,7 +88,7 @@ export default function CartPage() {
             <SkeletonCard />
           ) : (
             <Wallet
-              initialization={{ preferenceId }}
+              initialization={{ preferenceId, redirectMode: "modal" }}
               customization={{
                 visual: {
                   buttonBackground: "black",

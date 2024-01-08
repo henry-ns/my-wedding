@@ -9,5 +9,5 @@ export const contentful = createClient({
 
 export const managementContentful = createManagementClient({
   space: env.CONTENTFUL_SPACE_ID,
-  accessToken: env.CONTENTFUL_ACCESS_TOKEN,
+  accessToken: env.MANAGEMENT_CONTENTFUL_ACCESS_TOKEN,
 });

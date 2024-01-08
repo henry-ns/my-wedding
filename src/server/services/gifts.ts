@@ -2,10 +2,12 @@
 
 import { nanoid } from "nanoid";
 
-import { contentful } from "~/server/contentful";
+import { contentful, managementContentful } from "~/server/contentful";
 import { Gift } from "~/types/gift";
 
 import { eq } from "drizzle-orm";
+import { env } from "~/env";
+import { sleep } from "~/utils/sleep";
 import { db } from "../db";
 import { gifts } from "../db/schema";
 
@@ -41,12 +43,14 @@ type Input = {
   limit: number;
   price?: number;
   name?: string;
+  available?: boolean[];
 };
 
 export async function getAvailableGifts({
   page,
   limit,
   name,
+  available = [true],
 }: Input): Promise<Output> {
   try {
     const response = await contentful.getEntries({
@@ -54,7 +58,7 @@ export async function getAvailableGifts({
       skip: limit * (page - 1),
       content_type: "weddingGift",
       "fields.name[match]": name,
-      "fields.available[exists]": true,
+      "fields.available[in]": available,
     });
 
     const { skip, total, items } = response;
@@ -89,26 +93,34 @@ type BuyGiftsInput = {
 };
 
 export async function buyGifts({ items, userId }: BuyGiftsInput) {
+  if (items.length < 1) return;
+
   // TUDO Make gifts unavailable
-  // const space = await managementContentful.getSpace(env.CONTENTFUL_SPACE_ID);
-  // const environment = await space.getEnvironment("master");
-  // const entries = await environment.getEntries({
-  //   content_type: "weddingGift",
-  //   "fields.slug[in]": items.map((i) => i.slug).join(","),
-  // });
+  const space = await managementContentful.getSpace(env.CONTENTFUL_SPACE_ID);
+  const environment = await space.getEnvironment("master");
+  const entries = await environment.getEntries({
+    content_type: "weddingGift",
+    "fields.slug[in]": items.map((i) => i.slug).join(","),
+  });
 
-  // console.log({ entries });
-  // for (const i of entries.items) {
-  //   i.fields.available = false;
-  // }
+  for (const i of entries.items) {
+    console.log("ITEM", i.fields);
+    i.fields.available = { "en-US": false };
+  }
 
-  // await Promise.all(entries.items.map((i) => i.update()));
+  await Promise.all(
+    entries.items.map(async (i) => {
+      const entry = await i.update();
+      sleep(10);
+      entry.publish();
+    }),
+  );
 
   // Create user gifts
   await db.insert(gifts).values(
     items.map((i) => ({
-      buyerId: userId,
       id: nanoid(),
+      buyerId: userId,
       name: i.name,
       slug: i.slug,
       unitPrice: i.priceInCents,

@@ -7,6 +7,7 @@ export const env = createEnv({
 
     CONTENTFUL_ACCESS_TOKEN: z.string(),
     CONTENTFUL_SPACE_ID: z.string(),
+    MANAGEMENT_CONTENTFUL_ACCESS_TOKEN: z.string(),
 
     DATABASE_URL: z
       .string()
@@ -56,6 +57,8 @@ export const env = createEnv({
 
     CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,
     CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    MANAGEMENT_CONTENTFUL_ACCESS_TOKEN:
+      process.env.MANAGEMENT_CONTENTFUL_ACCESS_TOKEN,
 
     DATABASE_URL: process.env.DATABASE_URL,
     DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,

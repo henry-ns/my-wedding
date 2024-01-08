@@ -5,6 +5,8 @@ import { getUserGifts } from "~/server/services/gifts";
 import { getUserPresence } from "~/server/services/presences";
 import { formatCentsToCurrency } from "~/utils/format-currency";
 
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
 import { getUser } from "~/server/services/user";
 import { EditProfile } from "./edit-profile";
 import { PresenceForm } from "./presence-form";
@@ -75,6 +77,12 @@ export default async function ProfilePage() {
               </div>
             </div>
           ))}
+
+          {gifts.length === 0 && (
+            <Link href="/gifts" prefetch>
+              <Button className="mr-auto">Lista de Presentes</Button>
+            </Link>
+          )}
         </ul>
       </section>
     </main>

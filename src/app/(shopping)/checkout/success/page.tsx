@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { SkeletonCard } from "~/components/ui/skeletons/skeleton-card";
 import { useCart } from "~/hooks/cart";
@@ -12,14 +12,19 @@ export default function CheckoutSuccessPage() {
   const cart = useCart();
   const session = useSession();
   const [isBuying, setIsBuying] = useState(true);
+  const done = useRef(false);
 
   useEffect(() => {
+    if (cart.items.length < 1 || !session.data?.user.id || done.current) return;
+
     buyGifts({
       items: cart.items,
-      userId: session.data?.user.id || "",
+      userId: session.data.user.id,
     })
       .then(() => cart.clean())
       .finally(() => setIsBuying(false));
+
+    done.current = true;
   }, [cart.items, cart.clean, session.data?.user.id]);
 
   if (isBuying) {

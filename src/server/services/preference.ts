@@ -31,6 +31,11 @@ export async function getPreferenceId({
         success: `${origin}/checkout/success`,
         failure: `${origin}/checkout/failure`,
       },
+      back_urls: {
+        success: `${origin}/checkout/success`,
+        failure: `${origin}/checkout/failure`,
+      },
+      auto_return: "approved",
     },
   });
 
