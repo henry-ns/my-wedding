@@ -10,7 +10,7 @@ type Props = {
 export function GiftList({ gifts }: Props) {
   console.log({ gifts });
   return (
-    <div className="flex justify-start items-start flex-wrap gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {gifts.map((g) => (
         <GiftCard key={g.slug} gift={g} />
       ))}

@@ -18,15 +18,15 @@ export function GiftCard({ gift }: Props) {
   const [image] = gift.images;
 
   return (
-    <div className="grow flex-1 group border-4 p-4 rounded-xl min-w-[220px] max-w-lg border-gray-200 w-full hover:border-primary-500 transition-all">
+    <div className="flex flex-col group border-4 p-4 rounded-xl border-gray-200 w-full hover:border-primary-500 transition-all">
       <img
         alt={image?.fields.title}
         src={image?.fields.file.url}
-        className="w-full h-32 object-cover rounded-lg mb-4 transition-all group-hover:-translate-y-6 group-hover:scale-y-[130%]"
+        className="w-full h-32 object-cover bg-primary-100 rounded-lg mb-4 transition-all group-hover:-translate-y-6 group-hover:scale-y-[130%]"
       />
 
       <span className="text-lg block">{gift.name}</span>
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between mt-auto">
         <span className="font-bold text-2xl text-primary-500">
           {formatCentsToCurrency(gift.priceInCents)}
         </span>
