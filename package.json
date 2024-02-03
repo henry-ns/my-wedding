@@ -4,14 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
     "db:push": "dotenv drizzle-kit push:sqlite",
     "db:generate": "dotenv drizzle-kit generate:sqlite",
     "db:studio": "dotenv drizzle-kit studio",
     "up": "npx npm-check-updates -ui",
+    "check": "npx tsc -b -pretty",
     "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "build": "next build"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.5.0",
