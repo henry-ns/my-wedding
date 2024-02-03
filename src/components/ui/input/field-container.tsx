@@ -31,7 +31,7 @@ export function FieldContainer({
 
       {children}
 
-      {error && <span className="ml-3 text-dangerous-500">{error}</span>}
+      {error && <span className="ml-3 text-red-500">{error}</span>}
     </div>
   );
 }

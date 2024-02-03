@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { FormEvent, useState, useTransition } from "react";
 import { tv } from "tailwind-variants";
 
+import { z } from "zod";
 import { useToast } from "~/components/ui/toast";
+import { FormErrors, parseFormErrors } from "~/utils/parse-form-errors";
 import { Input } from "../../../components/ui/input";
 import { signUp } from "./actions";
 
@@ -25,40 +26,73 @@ const buttonStyle = tv({
   },
 });
 
+const schema = z.object({
+  password: z
+    .string({ required_error: "A senha é obrigatória" })
+    .min(1, "A senha é obrigatória")
+    .min(3, "Deve ter pelo menos 3 caracteres"),
+  name: z
+    .string({ required_error: "O nome é obrigatório" })
+    .min(1, "O nome é obrigatório")
+    .min(3, "Deve ter pelo menos 3 caracteres"),
+  email: z
+    .string({ required_error: "A senha é obrigatória" })
+    .email({ message: "Deve ser um email valido" }),
+});
+
 export function RegisterForm() {
-  const [state, formAction] = useFormState(signUp, {});
-  const { pending } = useFormStatus();
   const router = useRouter();
   const toast = useToast();
 
-  useEffect(() => {
-    if (state.success) {
-      router.back();
-      toast.show({
-        status: "positive",
-        title: "Conta criada com sucesso",
-        description: "Agora só entrar com os dados cadastrados",
-      });
-      return;
-    }
+  const [formError, setFormError] = useState<FormErrors>();
+  const [pending, startSubmitting] = useTransition();
 
-    if (state.success === false) {
-      toast.show({
-        status: "error",
-        title: "Não foi possível criar sua conta",
-        description: "Verifique seus dados e tente novamente",
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    startSubmitting(async () => {
+      setFormError(undefined);
+      const formData = new FormData(e.currentTarget);
+      const validate = await schema.safeParseAsync({
+        email: formData.get("email"),
+        name: formData.get("name"),
+        password: formData.get("password"),
       });
-    }
-  }, [toast, router, state]);
+
+      if (!validate.success) {
+        const formError = parseFormErrors(validate.error);
+        setFormError(formError);
+        return;
+      }
+
+      try {
+        await signUp(validate.data);
+
+        router.back();
+        toast.show({
+          status: "positive",
+          title: "Conta criada com sucesso",
+          description: "Agora só entrar com os dados cadastrados",
+        });
+      } catch {
+        toast.show({
+          status: "error",
+          title: "Não foi possível criar sua conta",
+          description: "Verifique seus dados e tente novamente",
+        });
+      }
+    });
+  }
 
   return (
-    <form action={formAction} className="flex flex-col w-full">
+    <form onSubmit={submit} className="flex flex-col w-full">
       <Input
         label="Nome"
         name="name"
         placeholder="Seu nome completo"
         className="mb-2"
         mask="Capitalize"
+        error={formError?.name}
         isRequired
       />
       <Input
@@ -67,6 +101,7 @@ export function RegisterForm() {
         type="email"
         placeholder="exemplo@email.com"
         className="mb-2"
+        error={formError?.email}
         isRequired
       />
       <Input
@@ -74,6 +109,7 @@ export function RegisterForm() {
         name="password"
         type="password"
         placeholder="******"
+        error={formError?.password}
         isRequired
       />
 

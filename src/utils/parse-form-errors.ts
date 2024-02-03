@@ -1,6 +1,7 @@
 import type { ZodError } from "zod";
 
-type FormErrors = Record<string, string | undefined>;
+export type FormErrors = Record<string, string | undefined>;
+
 export function parseFormErrors({ issues }: ZodError): FormErrors {
   const formErrors: FormErrors = {};
 

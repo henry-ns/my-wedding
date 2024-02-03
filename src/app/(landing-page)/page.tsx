@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { sleep } from "~/utils/sleep";
 import { HomeSection } from "./home";
 import { LocationSection } from "./location";
 import { TimerSection } from "./timer";
@@ -14,8 +13,6 @@ const GuestInfo = dynamic(
 );
 
 export default async function LandingPage() {
-  await sleep(1000);
-
   return (
     <main className="relative min-h-screen bg-bg text-gray-900">
       <GuestInfo className="fixed right-2 top-2" />

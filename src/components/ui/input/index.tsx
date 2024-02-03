@@ -31,7 +31,7 @@ const styles = tv({
   `,
   variants: {
     withError: {
-      true: "border-red-700 hover:border-red-300",
+      true: "border-red-500 hover:border-red-300",
     },
   },
 });
