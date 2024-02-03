@@ -2,11 +2,10 @@
 
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
+import { Button } from "~/components/ui/button";
 import { useCartItem } from "~/hooks/cart.ts";
 import { Gift } from "~/types/gift";
 import { formatCentsToCurrency } from "~/utils/format-currency";
-
-import { Button } from "../../../components/ui/button";
 
 type Props = {
   gift: Gift;
@@ -14,7 +13,6 @@ type Props = {
 
 export function GiftCard({ gift }: Props) {
   const cardItem = useCartItem(gift);
-
   const [image] = gift.images;
 
   return (

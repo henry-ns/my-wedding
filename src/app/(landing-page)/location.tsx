@@ -20,14 +20,13 @@ export function LocationSection() {
             o ponto mais importante desse dia, contamos com sua presença nessa
             celebração que será realizada na{" "}
             <strong className="font-bold">
-              Paróquia Sagrada Família Rua Otávio Batista Cabral - Rocha
-              Cavalcante, Campina Grande.
+              {env.NEXT_PUBLIC_CEREMONY_ADDRESS}
             </strong>
           </p>
           <p className="mt-2">
             Após a cerimônia, vamos nos reunir e confraternizar{" "}
             <strong className="font-bold">
-              R. Maria da Guia Freitas Alves - Malvinas, Campina Grande.
+              {env.NEXT_PUBLIC_PARTY_ADDRESS}
             </strong>
           </p>
         </div>

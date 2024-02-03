@@ -30,16 +30,12 @@ export const env = createEnv({
       // VERCEL_URL doesn't include `https` so it cant be validated as a URL
       process.env.VERCEL ? z.string() : z.string().url(),
     ),
-
-    DISCORD_CLIENT_ID: z.string(),
-    DISCORD_CLIENT_SECRET: z.string(),
-
-    GOOGLE_CLIENT_ID: z.string(),
-    GOOGLE_CLIENT_SECRET: z.string(),
   },
 
   client: {
     NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL: z.string(),
+    NEXT_PUBLIC_CEREMONY_ADDRESS: z.string(),
+    NEXT_PUBLIC_PARTY_ADDRESS: z.string(),
     NEXT_PUBLIC_WEDDING_DATE: z.string().transform((v) => new Date(v)),
     NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY: z.string(),
   },
@@ -66,13 +62,9 @@ export const env = createEnv({
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
 
-    DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
-    DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-
-    GOOGLE_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-
     NEXT_PUBLIC_WEDDING_DATE: process.env.NEXT_PUBLIC_WEDDING_DATE,
+    NEXT_PUBLIC_PARTY_ADDRESS: process.env.NEXT_PUBLIC_PARTY_ADDRESS,
+    NEXT_PUBLIC_CEREMONY_ADDRESS: process.env.NEXT_PUBLIC_CEREMONY_ADDRESS,
     NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL:
       process.env.NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL,
   },

@@ -1,10 +1,11 @@
 import dynamic from "next/dynamic";
-import { HomeSection } from "./landing-page/home";
-import { LocationSection } from "./landing-page/location";
-import { TimerSection } from "./landing-page/timer";
+import { sleep } from "~/utils/sleep";
+import { HomeSection } from "./home";
+import { LocationSection } from "./location";
+import { TimerSection } from "./timer";
 
 const GuestInfo = dynamic(
-  () => import("./guest-info").then((mod) => mod.GuestInfo),
+  () => import("../guest-info").then((mod) => mod.GuestInfo),
   {
     loading: () => (
       <div className="fixed right-2 top-2 w-14 h-14 rounded-full animate-pulse bg-gray-300" />
@@ -12,7 +13,9 @@ const GuestInfo = dynamic(
   },
 );
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  await sleep(1000);
+
   return (
     <main className="relative min-h-screen bg-bg text-gray-900">
       <GuestInfo className="fixed right-2 top-2" />

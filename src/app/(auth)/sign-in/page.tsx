@@ -4,8 +4,6 @@ import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
 
 import { CredentialSignInForm } from "../credential-sign-in-form";
-import { DiscordSignInButton } from "../discord-sign-in-button";
-import { GoogleSignInButton } from "../google-sign-in-button";
 
 export default async function SignInPage() {
   const session = await getServerAuthSession();
@@ -22,14 +20,14 @@ export default async function SignInPage() {
           Fazer login
         </h1>
 
-        <DiscordSignInButton className="mb-2" />
+        {/* <DiscordSignInButton className="mb-2" />
         <GoogleSignInButton />
 
         <div className="w-full flex items-center space-x-4 my-6">
           <div className="flex-1 h-0.5 rounded-sm bg-primary-500 opacity-30" />
           <span className="uppercase text-sm font-light text-gray-500">ou</span>
           <div className="flex-1 h-0.5 rounded-sm bg-primary-500 opacity-30" />
-        </div>
+        </div> */}
 
         <CredentialSignInForm />
       </div>
