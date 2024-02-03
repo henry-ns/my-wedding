@@ -1,33 +1,20 @@
 "use client";
 
-import { Wallet, initMercadoPago } from "@mercadopago/sdk-react";
+import { initMercadoPago } from "@mercadopago/sdk-react";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useEffect } from "react";
-
+import { Fragment } from "react";
 import { Button } from "~/components/ui/button";
-import { SkeletonCard } from "~/components/ui/skeletons/skeleton-card";
 import { env } from "~/env";
-import { useCart, usePreferenceId } from "~/hooks/cart";
-import { getPreferenceId } from "~/server/services/preference";
+import { useCart } from "~/hooks/cart";
 import { formatCentsToCurrency } from "~/utils/format-currency";
+import { PayButton } from "./pay-button";
 
 initMercadoPago(env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY);
 
 export default function CartPage() {
   const cart = useCart();
-  const [{ state, preferenceId }, setPreference] = usePreferenceId();
-
-  console.log({ state, preferenceId });
-  useEffect(() => {
-    if (cart.items.length === 0 || (state === "loaded" && preferenceId)) return;
-
-    setPreference({ state: "loading" });
-    getPreferenceId({ items: cart.items })
-      .then((id) => setPreference({ preferenceId: id, state: "loaded" }))
-      .catch(() => setPreference({ state: "error" }));
-  }, [state, preferenceId, setPreference, cart.items]);
 
   return (
     <>
@@ -84,18 +71,7 @@ export default function CartPage() {
             </span>
           </div>
 
-          {state !== "loaded" || !preferenceId ? (
-            <SkeletonCard />
-          ) : (
-            <Wallet
-              initialization={{ preferenceId, redirectMode: "modal" }}
-              customization={{
-                visual: {
-                  buttonBackground: "black",
-                },
-              }}
-            />
-          )}
+          <PayButton items={cart.items} />
         </div>
       )}
     </>

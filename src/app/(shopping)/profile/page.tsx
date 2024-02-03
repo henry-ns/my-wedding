@@ -79,9 +79,11 @@ export default async function ProfilePage() {
           ))}
 
           {gifts.length === 0 && (
-            <Link href="/gifts" prefetch>
-              <Button className="mr-auto">Lista de Presentes</Button>
-            </Link>
+            <Button>
+              <Link prefetch href="/gifts">
+                Lista de Presentes
+              </Link>
+            </Button>
           )}
         </ul>
       </section>
