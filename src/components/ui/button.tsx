@@ -40,6 +40,7 @@ const styles = tv({
         "bg-gray-400 cursor-not-allowed",
         "hover:bg-gray-400",
         "active:bg-gray-400",
+        "select-none",
       ],
     },
   },
@@ -68,7 +69,6 @@ function BaseButton(
     isLoading,
     loadingText,
     icon: Icon,
-    onClick,
     ...rest
   }: ButtonProps,
   ref: Ref<HTMLButtonElement>,
@@ -92,7 +92,6 @@ function BaseButton(
       type="button"
       ref={ref}
       className={styles({ variant, fullWidth, isDisabled, className })}
-      onClick={(e) => !isDisabled && onClick?.(e)}
       {...rest}
     >
       {isLoading ? (
