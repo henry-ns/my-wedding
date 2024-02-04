@@ -1,6 +1,7 @@
 "use server";
 
 import { Preference } from "mercadopago";
+import { getSession } from "next-auth/react";
 import { headers } from "next/headers";
 
 import { mercadopago } from "~/server/mercadopago";
@@ -15,6 +16,7 @@ export async function getPreferenceId({
 }: Input): Promise<string | undefined> {
   const origin = headers().get("origin");
   const preference = new Preference(mercadopago);
+  const session = await getSession();
 
   const response = await preference.create({
     body: {
@@ -36,6 +38,10 @@ export async function getPreferenceId({
         failure: `${origin}/checkout/failure`,
       },
       auto_return: "approved",
+      payer: {
+        name: session?.user.name || undefined,
+        email: session?.user.email || undefined,
+      },
     },
   });
 
