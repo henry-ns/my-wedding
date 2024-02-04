@@ -3,7 +3,7 @@
 import { nanoid } from "nanoid";
 
 import { contentful, managementContentful } from "~/server/contentful";
-import { Gift } from "~/types/gift";
+import { CartItem, Gift } from "~/types/gift";
 
 import { eq } from "drizzle-orm";
 import { env } from "~/env";
@@ -43,14 +43,12 @@ type Input = {
   limit: number;
   price?: number;
   name?: string;
-  available?: boolean[];
 };
 
 export async function getAvailableGifts({
   page,
   limit,
   name,
-  available = [true],
 }: Input): Promise<Output> {
   try {
     const response = await contentful.getEntries({
@@ -58,7 +56,7 @@ export async function getAvailableGifts({
       skip: limit * (page - 1),
       content_type: "weddingGift",
       "fields.name[match]": name,
-      "fields.available[in]": available,
+      "fields.amount[gte]": 1,
     });
 
     const { skip, total, items } = response;
@@ -89,7 +87,7 @@ export async function getAvailableGifts({
 
 type BuyGiftsInput = {
   userId: string;
-  items: Gift[];
+  items: CartItem[];
 };
 
 export async function buyGifts({ items, userId }: BuyGiftsInput) {
@@ -104,8 +102,10 @@ export async function buyGifts({ items, userId }: BuyGiftsInput) {
   });
 
   for (const i of entries.items) {
-    console.log("ITEM", i.fields);
-    i.fields.available = { "en-US": false };
+    const quantity =
+      items.find((x) => x.slug === i.fields.slug)?.selectedAmount || 1;
+
+    i.fields.amount = { "en-US": i.fields.amount - quantity };
   }
 
   await Promise.all(
