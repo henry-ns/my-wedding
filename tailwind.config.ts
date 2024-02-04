@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
-export default ({
+export default {
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
@@ -32,7 +32,12 @@ export default ({
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-        header: "var(--font-header)",
+        header: ["var(--font-sans)", ...fontFamily.sans],
+        especial: [
+          "var(--font-especial)",
+          "var(--font-sans)",
+          ...fontFamily.sans,
+        ],
       },
       colors: {
         bg: "#FEFCFB",
@@ -79,4 +84,4 @@ export default ({
     },
   },
   plugins: [],
-} satisfies Config);
+} satisfies Config;

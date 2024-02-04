@@ -35,7 +35,7 @@ export function HomeSection() {
       </div>
 
       <div className="-ml-2 mb-2 border-b-4 border-b-secondary-300 px-2 md:mb-4 md:px-4">
-        <h1 className="relative text-3xl font-bold tracking-widest text-gray-800 sm:text-4xl md:text-5xl">
+        <h1 className="relative text-3xl font-bold tracking-widest text-gray-800 sm:text-4xl md:text-5xl font-especial">
           Henrique & Jennifer
         </h1>
       </div>

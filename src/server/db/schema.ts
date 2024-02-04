@@ -24,15 +24,27 @@ export const presences = sqliteTable("presence", {
   checkedAt: integer("checked_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+export const payments = sqliteTable("payment ", {
+  id: text("id").notNull().primaryKey(),
+  unitTotal: integer("unit_total").notNull(),
+  payerId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+});
+
 export const gifts = sqliteTable("gift", {
   id: text("id").notNull().primaryKey(),
   slug: text("slug").notNull(),
   name: text("name").notNull(),
+  quantity: integer("quantity").notNull(),
   unitPrice: integer("unit_price").notNull(),
   imageUrl: text("image").notNull(),
   buyerId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  paymentId: text("payment_id")
+    .notNull()
+    .references(() => payments.id, { onDelete: "cascade" }),
 });
 
 export const accounts = sqliteTable(

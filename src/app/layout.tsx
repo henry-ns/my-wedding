@@ -1,14 +1,15 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Provider } from "jotai";
+import { Metadata } from "next";
 import { Lato, Libre_Baskerville } from "next/font/google";
 import { ToastProvider } from "~/components/ui/toast";
 import "~/styles/globals.css";
 
 const headingFont = Libre_Baskerville({
-  weight: ["400", "700"],
+  weight: ["700"],
   subsets: ["latin"],
-  variable: "--font-header",
+  variable: "--font-especial",
 });
 
 const bodyFont = Lato({
@@ -17,7 +18,7 @@ const bodyFont = Lato({
   variable: "--font-sans",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Henrique e Jennifer",
   description: "Henrique e Jennifer vão casar!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],

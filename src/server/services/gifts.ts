@@ -86,11 +86,12 @@ export async function getAvailableGifts({
 }
 
 type BuyGiftsInput = {
+  paymentId: string;
   userId: string;
   items: CartItem[];
 };
 
-export async function buyGifts({ items, userId }: BuyGiftsInput) {
+export async function buyGifts({ items, userId, paymentId }: BuyGiftsInput) {
   if (items.length < 1) return;
 
   // TUDO Make gifts unavailable
@@ -125,6 +126,8 @@ export async function buyGifts({ items, userId }: BuyGiftsInput) {
       slug: i.slug,
       unitPrice: i.priceInCents,
       imageUrl: `https:${i.images[0]?.fields.file.url}`,
+      quantity: i.selectedAmount,
+      paymentId,
     })),
   );
 }

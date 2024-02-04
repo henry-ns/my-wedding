@@ -2,6 +2,7 @@
 
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -18,15 +19,16 @@ initMercadoPago(env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY);
 export default function CartPage() {
   const cart = useCart();
   const cartItems = useDebounceValue(cart.items, 400);
+  const totalPrice = useDebounceValue(cart.totalPrice, 400);
 
   return (
-    <>
+    <SessionProvider>
       <div className="border-2 border-dashed rounded-lg p-6">
         {cart.items.map((i, index) => (
           <Fragment key={i.slug}>
             {index > 0 && <div className="bg-gray-200 h-0.5 w-full my-4" />}
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-4 flex-wrap">
               <Image
                 width={80}
                 height={80}
@@ -106,17 +108,17 @@ export default function CartPage() {
       </div>
 
       {cart.items.length > 0 && (
-        <div className="border-2 rounded-lg p-6 mt-8">
-          <div className="flex items-end justify-between space-x-4 mb-4">
+        <div className="border-2 rounded-lg mt-8">
+          <div className="flex items-end justify-between space-x-4 mb-4 px-6 pt-6">
             <strong className="text-3xl font-bold">Total</strong>
             <span className="text-3xl font-bold text-primary-500">
               {formatCentsToCurrency(cart.totalPrice)}
             </span>
           </div>
 
-          <PayButton items={cartItems} />
+          <PayButton items={cartItems} totalPrice={totalPrice} />
         </div>
       )}
-    </>
+    </SessionProvider>
   );
 }
