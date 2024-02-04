@@ -1,4 +1,5 @@
 import type { AdapterAccount } from "@auth/core/adapters";
+import { relations } from "drizzle-orm";
 import {
   integer,
   primaryKey,
@@ -24,13 +25,19 @@ export const presences = sqliteTable("presence", {
   checkedAt: integer("checked_at", { mode: "timestamp_ms" }).notNull(),
 });
 
-export const payments = sqliteTable("payment ", {
+export const payments = sqliteTable("payment", {
   id: text("id").notNull().primaryKey(),
   unitTotal: integer("unit_total").notNull(),
-  payerId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  payerId: text("user_id").notNull(),
 });
+
+export const paymentsRelations = relations(payments, ({ one, many }) => ({
+  gifts: many(gifts),
+  payer: one(users, {
+    fields: [payments.payerId],
+    references: [users.id],
+  }),
+}));
 
 export const gifts = sqliteTable("gift", {
   id: text("id").notNull().primaryKey(),
@@ -39,13 +46,20 @@ export const gifts = sqliteTable("gift", {
   quantity: integer("quantity").notNull(),
   unitPrice: integer("unit_price").notNull(),
   imageUrl: text("image").notNull(),
-  buyerId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  paymentId: text("payment_id")
-    .notNull()
-    .references(() => payments.id, { onDelete: "cascade" }),
+  buyerId: text("user_id").notNull(),
+  paymentId: text("payment_id").notNull(),
 });
+
+export const giftsRelations = relations(gifts, ({ one }) => ({
+  payment: one(payments, {
+    fields: [gifts.paymentId],
+    references: [payments.id],
+  }),
+  buyer: one(users, {
+    fields: [gifts.buyerId],
+    references: [users.id],
+  }),
+}));
 
 export const accounts = sqliteTable(
   "account",

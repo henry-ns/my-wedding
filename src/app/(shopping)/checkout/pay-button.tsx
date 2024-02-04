@@ -56,7 +56,7 @@ export const PayButton = memo(({ items, totalPrice }: Props) => {
       return;
     }
 
-    router.push(`/payments/${response.paymentId}`);
+    router.push(`/checkout/${response.paymentId}`);
   }
 
   if (loadingPreference) {

@@ -6,8 +6,8 @@ import { PaymentCreateData } from "mercadopago/dist/clients/payment/create/types
 import { db } from "~/server/db";
 import { payments } from "~/server/db/schema";
 import { mercadopago } from "~/server/mercadopago";
-import { buyGifts } from "~/server/services/gifts";
 import { CartItem } from "~/types/gift";
+import { buyGifts } from "./buy-gifts";
 
 type Input = {
   userId: string;

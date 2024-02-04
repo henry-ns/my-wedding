@@ -1,31 +1,10 @@
 "use server";
 
-import { nanoid } from "nanoid";
-
-import { contentful, managementContentful } from "~/server/contentful";
-import { CartItem, Gift } from "~/types/gift";
-
 import { eq } from "drizzle-orm";
-import { env } from "~/env";
-import { sleep } from "~/utils/sleep";
+import { contentful } from "~/server/contentful";
+import { Gift } from "~/types/gift";
 import { db } from "../db";
 import { gifts } from "../db/schema";
-
-export async function getGiftBySlug(slug: string): Promise<Gift | undefined> {
-  try {
-    const response = await contentful.getEntries({
-      content_type: "weddingGift",
-      limit: 1,
-      "fields.slug": slug,
-    });
-
-    return response.items.find((i) => i.fields.slug === slug)?.fields as
-      | Gift
-      | undefined;
-  } catch {
-    return undefined;
-  }
-}
 
 type Output = {
   items: Gift[];
@@ -83,53 +62,6 @@ export async function getAvailableGifts({
       },
     };
   }
-}
-
-type BuyGiftsInput = {
-  paymentId: string;
-  userId: string;
-  items: CartItem[];
-};
-
-export async function buyGifts({ items, userId, paymentId }: BuyGiftsInput) {
-  if (items.length < 1) return;
-
-  // TUDO Make gifts unavailable
-  const space = await managementContentful.getSpace(env.CONTENTFUL_SPACE_ID);
-  const environment = await space.getEnvironment("master");
-  const entries = await environment.getEntries({
-    content_type: "weddingGift",
-    "fields.slug[in]": items.map((i) => i.slug).join(","),
-  });
-
-  for (const i of entries.items) {
-    const quantity =
-      items.find((x) => x.slug === i.fields.slug)?.selectedAmount || 1;
-
-    i.fields.amount = { "en-US": i.fields.amount - quantity };
-  }
-
-  await Promise.all(
-    entries.items.map(async (i) => {
-      const entry = await i.update();
-      sleep(10);
-      entry.publish();
-    }),
-  );
-
-  // Create user gifts
-  await db.insert(gifts).values(
-    items.map((i) => ({
-      id: nanoid(),
-      buyerId: userId,
-      name: i.name,
-      slug: i.slug,
-      unitPrice: i.priceInCents,
-      imageUrl: `https:${i.images[0]?.fields.file.url}`,
-      quantity: i.selectedAmount,
-      paymentId,
-    })),
-  );
 }
 
 export async function getUserGifts(userId: string) {

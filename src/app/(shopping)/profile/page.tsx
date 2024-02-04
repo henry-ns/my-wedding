@@ -1,22 +1,19 @@
-import Image from "next/image";
-
-import { requireAuthentication } from "~/server/auth";
-import { getUserGifts } from "~/server/services/gifts";
-import { getUserPresence } from "~/server/services/presences";
-import { formatCentsToCurrency } from "~/utils/format-currency";
-
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { requireAuthentication } from "~/server/auth";
+import { getUserPresence } from "~/server/services/presences";
 import { getUser } from "~/server/services/user";
-import { EditProfile } from "./edit-profile";
-import { PresenceForm } from "./presence-form";
-import { SignOutButton } from "./sign-out-button";
+import { getUserPayments } from "./actions/get-user-payments";
+import { EditProfile } from "./components/edit-profile";
+import { PaymentInfo } from "./components/payment-info";
+import { PresenceForm } from "./components/presence-form";
+import { SignOutButton } from "./components/sign-out-button";
 
 export default async function ProfilePage() {
   const session = await requireAuthentication("profile");
 
-  const [gifts, presence, user] = await Promise.all([
-    getUserGifts(session.user.id),
+  const [payments, presence, user] = await Promise.all([
+    getUserPayments(session.user.id),
     getUserPresence(session.user.id),
     getUser(session.user.id),
   ]);
@@ -56,29 +53,11 @@ export default async function ProfilePage() {
       <section className="mt-8">
         <h3 className="font-bold text-xl font-sans mb-4">Meus Presentes</h3>
         <ul className="space-y-4">
-          {gifts.map((g) => (
-            <div
-              key={g.id}
-              className="flex items-center space-x-4 rounded-xl bg-primary-100 p-4"
-            >
-              <Image
-                width={80}
-                height={80}
-                alt={g.name}
-                src={g.imageUrl}
-                className="rounded-lg h-20 w-20 object-cover"
-              />
-
-              <div className="flex-1 flex flex-col">
-                <span className="text-lg">{g.name}</span>
-                <span className="text-xl font-bold">
-                  {formatCentsToCurrency(g.unitPrice)}
-                </span>
-              </div>
-            </div>
+          {payments.map((p, i) => (
+            <PaymentInfo key={p.id} payment={p} index={i} />
           ))}
 
-          {gifts.length === 0 && (
+          {payments.length === 0 && (
             <Button>
               <Link prefetch href="/gifts">
                 Lista de Presentes

@@ -9,7 +9,7 @@ const styles = tv({
   base: [
     "px-4 h-10",
     "rounded-full",
-    "text-md text-white",
+    "text-md text-white whitespace-nowrap",
     "transition-colors duration-300",
     "flex items-center justify-center space-x-2",
   ],
