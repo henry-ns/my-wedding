@@ -12,7 +12,7 @@ type Props = {
 };
 
 export function GiftCard({ gift }: Props) {
-  const cardItem = useCartItem(gift);
+  const cartItem = useCartItem(gift);
   const [image] = gift.images;
 
   return (
@@ -29,11 +29,11 @@ export function GiftCard({ gift }: Props) {
           {formatCentsToCurrency(gift.priceInCents)}
         </span>
         <Button
-          variant={cardItem.isOnCard ? "secondary" : "primary"}
+          variant={cartItem.isOnCard ? "secondary" : "primary"}
           className="rounded-lg w-10 p-0"
-          onClick={cardItem.toggle}
+          onClick={cartItem.toggle}
         >
-          {cardItem.isOnCard ? (
+          {cartItem.isOnCard ? (
             <Cross2Icon className="stroke-white w-8 h-8 p-1.5" />
           ) : (
             <CheckIcon className="stroke-white w-8 h-8 p-1.5" />

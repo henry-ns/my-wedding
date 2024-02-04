@@ -3,10 +3,10 @@
 import { Wallet } from "@mercadopago/sdk-react";
 import { memo } from "react";
 import { getPreferenceId } from "~/server/services/preference";
-import { Gift } from "~/types/gift";
+import { CartItem } from "~/types/gift";
 
 type Props = {
-  items: Gift[];
+  items: CartItem[];
 };
 
 export const PayButton = memo(({ items }: Props) => {
@@ -17,15 +17,17 @@ export const PayButton = memo(({ items }: Props) => {
   return (
     <Wallet
       locale="pt-BR"
-      initialization={{
-        redirectMode: "modal",
-      }}
+      onSubmit={onSubmit}
+      initialization={{ redirectMode: "modal" }}
       customization={{
+        texts: {
+          action: "pay",
+          valueProp: "convenience_all",
+        },
         visual: {
           buttonBackground: "black",
         },
       }}
-      onSubmit={onSubmit}
     />
   );
 });

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useDebouncedCallback<
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -25,4 +25,15 @@ export function useDebouncedCallback<
     },
     [callback, wait],
   );
+}
+
+export function useDebounceValue<T>(value: T, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
+
+  return debouncedValue;
 }

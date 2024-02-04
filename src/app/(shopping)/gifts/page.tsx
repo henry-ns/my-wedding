@@ -15,7 +15,7 @@ type Props = {
 export default async function GiftsPage({ searchParams }: Props) {
   const gifts = await getAvailableGifts({
     page: Number(searchParams.page?.toString() || "1"),
-    limit: Number(searchParams.limit?.toString() || "10"),
+    limit: Number(searchParams.limit?.toString() || "12"),
     name: searchParams.search?.toString(),
   });
 

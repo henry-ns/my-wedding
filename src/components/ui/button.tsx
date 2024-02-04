@@ -68,6 +68,7 @@ function BaseButton(
     isLoading,
     loadingText,
     icon: Icon,
+    onClick,
     ...rest
   }: ButtonProps,
   ref: Ref<HTMLButtonElement>,
@@ -91,6 +92,7 @@ function BaseButton(
       type="button"
       ref={ref}
       className={styles({ variant, fullWidth, isDisabled, className })}
+      onClick={(e) => !isDisabled && onClick?.(e)}
       {...rest}
     >
       {isLoading ? (

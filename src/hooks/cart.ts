@@ -1,22 +1,13 @@
 "use client";
 
-import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { Gift } from "~/types/gift";
+import { CartItem, Gift } from "~/types/gift";
 
-type PreferenceAtom = {
-  state: "loaded" | "outdated" | "loading" | "error";
-  preferenceId?: string;
-};
-
-const cartItemsAtom = atomWithStorage<Gift[]>("jh-cart-items", []);
-
-const preferenceIdAtom = atomWithStorage<PreferenceAtom>("jh-cart-preference", {
-  state: "loading",
-});
+const cartItemsAtom = atomWithStorage<CartItem[]>("jh-cart-items", []);
 
 const totalCartItemsAtom = atom((get) => {
-  return get(cartItemsAtom).length;
+  return get(cartItemsAtom).reduce((acc, i) => acc + i.selectedAmount, 0);
 });
 
 const addToCartAtom = atom(null, (get, set, payload: Gift) => {
@@ -24,29 +15,57 @@ const addToCartAtom = atom(null, (get, set, payload: Gift) => {
     return;
   }
 
-  set(cartItemsAtom, (card) => [payload, ...card]);
-  set(preferenceIdAtom, { state: "outdated" });
+  set(cartItemsAtom, (card) => [
+    {
+      ...payload,
+      selectedAmount: 1,
+    },
+    ...card,
+  ]);
+});
+
+type UpdateQuantity = {
+  slug: string;
+  quantity: number;
+};
+
+const updateQuantityAtom = atom(null, (_, set, payload: UpdateQuantity) => {
+  set(cartItemsAtom, (card) =>
+    card.map((i) => {
+      if (i.slug !== payload.slug) {
+        return i;
+      }
+
+      return {
+        ...i,
+        selectedAmount: Math.max(1, Math.min(payload.quantity, i.amount)),
+      };
+    }),
+  );
 });
 
 const removeFromCartAtom = atom(null, (_, set, slug: string) => {
   set(cartItemsAtom, (card) => card.filter((i) => i.slug !== slug));
-  set(preferenceIdAtom, { state: "outdated" });
 });
 
 const cleanCartAtom = atom(null, (_, set) => {
   set(cartItemsAtom, []);
-  set(preferenceIdAtom, { state: "outdated" });
 });
 
 export function useCart() {
   const items = useAtomValue(cartItemsAtom);
-  const totalPrice = items.reduce((acc, i) => acc + i.priceInCents, 0);
+  const totalPrice = items.reduce(
+    (acc, i) => acc + i.priceInCents * i.selectedAmount,
+    0,
+  );
   const remove = useSetAtom(removeFromCartAtom);
   const clean = useSetAtom(cleanCartAtom);
+  const updateQuantity = useSetAtom(updateQuantityAtom);
 
   return {
     items,
     totalPrice,
+    updateQuantity,
     remove,
     clean,
   };
@@ -58,7 +77,6 @@ export function useTotalCartItems() {
 
 export function useCartItem(gift: Gift) {
   const items = useAtomValue(cartItemsAtom);
-
   const add = useSetAtom(addToCartAtom);
   const remove = useSetAtom(removeFromCartAtom);
 
@@ -66,18 +84,14 @@ export function useCartItem(gift: Gift) {
 
   function toggle() {
     if (isOnCard) {
-      remove(gift.slug);
-    } else {
-      add(gift);
+      return remove(gift.slug);
     }
+
+    add(gift);
   }
 
   return {
     toggle,
     isOnCard,
   };
-}
-
-export function usePreferenceId() {
-  return useAtom(preferenceIdAtom);
 }

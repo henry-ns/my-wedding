@@ -1,13 +1,15 @@
 "use client";
 
 import { initMercadoPago } from "@mercadopago/sdk-react";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { env } from "~/env";
 import { useCart } from "~/hooks/cart";
+import { useDebounceValue } from "~/hooks/debounce";
 import { formatCentsToCurrency } from "~/utils/format-currency";
 import { PayButton } from "./pay-button";
 
@@ -15,6 +17,7 @@ initMercadoPago(env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY);
 
 export default function CartPage() {
   const cart = useCart();
+  const cartItems = useDebounceValue(cart.items, 400);
 
   return (
     <>
@@ -39,13 +42,53 @@ export default function CartPage() {
                 </span>
               </div>
 
-              <Button
-                variant="secondary"
-                className="rounded-lg w-10 p-0"
-                onClick={() => cart.remove(i.slug)}
-              >
-                <Cross2Icon className="stroke-white w-8 h-8 p-1.5" />
-              </Button>
+              <div className="flex items-center space-x-4">
+                <Button
+                  variant="secondary"
+                  className="rounded-lg w-10 p-0"
+                  onClick={() => {
+                    const quantity = i.selectedAmount - 1;
+
+                    if (quantity < 1) {
+                      return cart.remove(i.slug);
+                    }
+
+                    cart.updateQuantity({ slug: i.slug, quantity });
+                  }}
+                >
+                  <ChevronLeftIcon className="stroke-white w-8 h-8 p-1.5" />
+                </Button>
+                <Input
+                  name="amount"
+                  className="h-10 w-14"
+                  inputProps={{
+                    className: "text-center",
+                    value: i.selectedAmount,
+                    onChange: (e) => {
+                      const quantity = Number(e.currentTarget.value);
+                      if (quantity < 1) return;
+
+                      cart.updateQuantity({
+                        slug: i.slug,
+                        quantity: Number(e.currentTarget.value),
+                      });
+                    },
+                  }}
+                />
+                <Button
+                  variant="primary"
+                  className="rounded-lg w-10 p-0"
+                  isDisabled={i.selectedAmount >= i.amount}
+                  onClick={() =>
+                    cart.updateQuantity({
+                      slug: i.slug,
+                      quantity: i.selectedAmount + 1,
+                    })
+                  }
+                >
+                  <ChevronRightIcon className="stroke-white w-8 h-8 p-1.5" />
+                </Button>
+              </div>
             </div>
           </Fragment>
         ))}
@@ -71,7 +114,7 @@ export default function CartPage() {
             </span>
           </div>
 
-          <PayButton items={cart.items} />
+          <PayButton items={cartItems} />
         </div>
       )}
     </>

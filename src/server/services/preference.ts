@@ -4,10 +4,10 @@ import { Preference } from "mercadopago";
 import { headers } from "next/headers";
 
 import { mercadopago } from "~/server/mercadopago";
-import { Gift } from "~/types/gift";
+import { CartItem } from "~/types/gift";
 
 type Input = {
-  items: Gift[];
+  items: CartItem[];
 };
 
 export async function getPreferenceId({
@@ -20,7 +20,7 @@ export async function getPreferenceId({
     body: {
       items: items.map((gift) => ({
         id: gift.slug,
-        quantity: 1,
+        quantity: gift.selectedAmount,
         title: gift.name,
         unit_price: gift.priceInCents / 100,
         currency_id: "BRL",

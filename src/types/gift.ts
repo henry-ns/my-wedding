@@ -3,6 +3,7 @@ export type Gift = {
   name: string;
   priceInCents: number;
   available: boolean;
+  amount: number;
   images: Array<{
     fields: {
       title: string;
@@ -11,4 +12,8 @@ export type Gift = {
       };
     };
   }>;
+};
+
+export type CartItem = Gift & {
+  selectedAmount: number;
 };

@@ -1,11 +1,6 @@
 "use client";
 
-import type {
-  HTMLAttributes,
-  HTMLInputTypeAttribute,
-  KeyboardEvent,
-  Ref,
-} from "react";
+import type { HTMLInputTypeAttribute, KeyboardEvent, Ref } from "react";
 import { forwardRef } from "react";
 
 import { tv } from "tailwind-variants";
@@ -19,7 +14,7 @@ type Props = Omit<FieldContainerProps, "children"> & {
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
   mask?: InputMasks;
-  inputProps?: HTMLAttributes<HTMLInputElement>;
+  inputProps?: JSX.IntrinsicElements["input"];
 };
 
 const styles = tv({
@@ -64,13 +59,13 @@ function BaseInput(
         name={name}
         type={type}
         placeholder={placeholder}
+        defaultValue={defaultValue}
+        {...inputProps}
+        onKeyUp={handleKeyUp}
         className={styles({
           withError: !!error,
           className: inputProps?.className,
         })}
-        defaultValue={defaultValue}
-        {...inputProps}
-        onKeyUp={handleKeyUp}
       />
     </FieldContainer>
   );
