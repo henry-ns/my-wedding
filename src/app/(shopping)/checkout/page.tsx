@@ -116,7 +116,11 @@ export default function CartPage() {
             </span>
           </div>
 
-          <PayButton items={cartItems} totalPrice={totalPrice} />
+          <PayButton
+            items={cartItems}
+            totalPrice={totalPrice}
+            onSuccess={cart.clean}
+          />
         </div>
       )}
     </SessionProvider>

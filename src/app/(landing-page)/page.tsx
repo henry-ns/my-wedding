@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
+import { LocationSection } from "./components/location";
+import { TimerSection } from "./components/timer";
 import { HomeSection } from "./home";
-import { LocationSection } from "./location";
-import { TimerSection } from "./timer";
 
 const GuestInfo = dynamic(
   () => import("../guest-info").then((mod) => mod.GuestInfo),

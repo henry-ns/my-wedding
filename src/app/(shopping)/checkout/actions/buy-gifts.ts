@@ -25,10 +25,11 @@ export async function buyGifts({ items, userId, paymentId }: BuyGiftsInput) {
   });
 
   for (const i of entries.items) {
+    const amount = i.fields.amount["en-US"];
     const quantity =
       items.find((x) => x.slug === i.fields.slug)?.selectedAmount || 1;
 
-    i.fields.amount = { "en-US": i.fields.amount - quantity };
+    i.fields.amount = { "en-US": +amount - quantity || 0 };
   }
 
   await Promise.all(

@@ -17,7 +17,11 @@ type Input = {
 
 const paymentApi = new Payment(mercadopago);
 
-export async function processPayment({ userId, paymentData, items }: Input) {
+export async function processPayment({
+  userId,
+  paymentData,
+  items,
+}: Input): Promise<string> {
   console.log({ userId });
   const payload = {
     body: {
@@ -40,11 +44,10 @@ export async function processPayment({ userId, paymentData, items }: Input) {
 
   const response = await paymentApi.create(payload);
   if (!response.id) {
-    return {
-      success: false,
-      message: "Erro na criação do pagamento",
-    };
+    throw new Error("Api de pagamento não retornou o id");
   }
+
+  console.log({ paymentId: response.id });
 
   const payment = await db
     .insert(payments)
@@ -62,8 +65,5 @@ export async function processPayment({ userId, paymentData, items }: Input) {
     paymentId: payment.id,
   });
 
-  return {
-    success: true,
-    paymentId: response.id,
-  };
+  return String(response.id);
 }

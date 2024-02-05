@@ -35,9 +35,9 @@ const styles = tv({
   variants: {
     status: {
       pending: "bg-orange-200 text-orange-700",
-      approved: "bg-green-200 text-orange-700",
       in_process: "bg-orange-200 text-orange-700",
       in_mediation: "bg-orange-200 text-orange-700",
+      approved: "bg-green-200 text-green-700",
       authorized: "bg-blue-200 text-blue-700",
       rejected: "bg-red-200 text-red-700",
       cancelled: "bg-red-200 text-red-700",

@@ -14,9 +14,10 @@ import { processPayment } from "./actions/process-payment";
 type Props = {
   items: CartItem[];
   totalPrice: number;
+  onSuccess: () => void;
 };
 
-export const PayButton = memo(({ items, totalPrice }: Props) => {
+export const PayButton = memo(({ items, totalPrice, onSuccess }: Props) => {
   const [preferenceId, setPreferenceId] = useState<string>();
   const [loadingPreference, startLoading] = useTransition();
   const session = useSession();
@@ -41,22 +42,23 @@ export const PayButton = memo(({ items, totalPrice }: Props) => {
   async function onSubmit(paymentData: IPaymentFormData) {
     if (!session.data) return;
 
-    const response = await processPayment({
-      items,
-      paymentData,
-      userId: session.data.user.id,
-    });
+    try {
+      const paymentId = await processPayment({
+        items,
+        paymentData,
+        userId: session.data.user.id,
+      });
 
-    if (!response.success) {
+      onSuccess();
+      router.push(`/checkout/${paymentId}`);
+    } catch (e) {
+      console.error(e);
       toast.show({
         status: "error",
         title: "Erro Inesperado",
         description: "Não foi possível prosseguir com o pagamento",
       });
-      return;
     }
-
-    router.push(`/checkout/${response.paymentId}`);
   }
 
   if (loadingPreference) {

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import { getUserPresence } from "~/server/services/presences";
 
-import { Button } from "../button";
-import { PresenceButton } from "./presence-button";
+import { Button } from "../components/button";
+import { PresenceButton } from "../components/presence-button";
 
 export async function HomeActions() {
   const session = await getServerAuthSession();

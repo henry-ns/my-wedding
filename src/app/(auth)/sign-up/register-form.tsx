@@ -114,12 +114,12 @@ export function RegisterForm() {
       />
 
       <button type="submit" className={buttonStyle({ pending })}>
-        {pending ? "Entrando..." : "Entrar"}
+        {pending ? "Cadastrando..." : "Cadastrar"}
       </button>
 
       <Link
         href="/sign-in"
-        className="w-full text-center text-gray-500 hover:underline"
+        className="w-full text-center text-gray-500 hover:underline overflow-"
       >
         Voltar
       </Link>

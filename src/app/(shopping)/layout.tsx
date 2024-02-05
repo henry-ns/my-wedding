@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+import { redirect } from "next/navigation";
+import { getServerAuthSession } from "~/server/auth";
 import { Header } from "./header";
 
 type Props = {
@@ -7,6 +9,12 @@ type Props = {
 };
 
 export default async function ShoppingLayout({ children }: Props) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    redirect("/sign-in");
+  }
+
   return (
     <div className="flex flex-col overflow-hidden">
       <Header />
