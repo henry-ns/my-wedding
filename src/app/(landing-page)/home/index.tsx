@@ -26,10 +26,10 @@ export function HomeSection() {
       <div className="a animate-spin border-8 border-primary-300 sm:border-[10px] md:border-[19px]">
         <Image
           alt="O Casal"
-          src="/photo.png"
+          src="/photo.jpg"
           width="286"
           height="286"
-          className="h-auto w-52 -rotate-45 animate-spin-reverse sm:h-56 sm:w-56 md:h-[286px] md:w-[286px]"
+          className="h-auto w-52 -rotate-45 animate-spin-reverse sm:h-56 sm:w-56 md:h-[286px] md:w-[286px] rounded-full"
           priority
         />
       </div>
