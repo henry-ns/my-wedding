@@ -7,9 +7,10 @@ import { Presence, setPresence } from "~/server/services/presences";
 type Props = {
   userId: string;
   presence?: Presence;
+  available?: boolean;
 };
 
-export function PresenceForm({ userId, presence }: Props) {
+export function PresenceForm({ userId, presence, available }: Props) {
   const [isLoading, startTransition] = useTransition();
   const [checker, setChecker] = useState(presence?.check);
 
@@ -31,7 +32,7 @@ export function PresenceForm({ userId, presence }: Props) {
   return (
     <div className="flex items-center gap-4">
       <Button
-        isDisabled={checker === true}
+        isDisabled={checker === true || !available}
         onClick={() => confirmPresence(true)}
         isLoading={checker !== true && isLoading}
       >

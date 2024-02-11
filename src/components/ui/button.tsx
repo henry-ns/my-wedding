@@ -8,7 +8,7 @@ import { Spinner } from "./spinner";
 const styles = tv({
   base: [
     "px-4 h-10",
-    "rounded-full",
+    "rounded-full select-none",
     "text-md text-white whitespace-nowrap",
     "transition-colors duration-300",
     "flex items-center justify-center space-x-2",
@@ -37,10 +37,9 @@ const styles = tv({
     },
     isDisabled: {
       true: [
-        "bg-gray-400 cursor-not-allowed",
+        "bg-gray-400 pointer-events-none",
         "hover:bg-gray-400",
         "active:bg-gray-400",
-        "select-none",
       ],
     },
   },
