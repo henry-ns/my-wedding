@@ -32,7 +32,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="pt">
       <body
-        className={`bg-bg font-sans ${bodyFont.variable} ${headingFont.variable}`}
+        className={`bg-bg ${bodyFont.variable} ${headingFont.variable} font-sans`}
       >
         <SpeedInsights />
 

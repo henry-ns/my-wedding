@@ -22,7 +22,6 @@ export async function processPayment({
   paymentData,
   items,
 }: Input): Promise<string> {
-  console.log({ userId });
   const payload = {
     body: {
       ...paymentData.formData,
@@ -40,14 +39,10 @@ export async function processPayment({
     },
   } satisfies PaymentCreateData;
 
-  console.log(payload);
-
   const response = await paymentApi.create(payload);
   if (!response.id) {
     throw new Error("Api de pagamento não retornou o id");
   }
-
-  console.log({ paymentId: response.id });
 
   const payment = await db
     .insert(payments)
