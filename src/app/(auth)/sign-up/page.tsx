@@ -5,7 +5,13 @@ export default function SignUpPage() {
   return (
     <main className="relative min-h-screen text-gray-900 bg-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-primary-100 p-8 shadow-sm rounded-lg flex flex-col items-center">
-        <Image src="/logo.svg" alt="logo" width="100" height="100" />
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          width="100"
+          height="100"
+          priority={false}
+        />
         <h1 className="text-2xl font-sans mb-8 text-gray-600 mt-2">
           Cadastrar
         </h1>

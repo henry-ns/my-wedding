@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
   content: ["./src/**/*.tsx"],
@@ -31,13 +30,9 @@ export default {
         "spin-reverse": "spin-reverse 14s linear infinite",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        header: ["var(--font-sans)", ...fontFamily.sans],
-        especial: [
-          "var(--font-especial)",
-          "var(--font-sans)",
-          ...fontFamily.sans,
-        ],
+        sans: ["var(--font-sans)"],
+        header: ["var(--font-sans)"],
+        especial: ["var(--font-especial)", "var(--font-sans)"],
       },
       colors: {
         bg: "#FEFCFB",

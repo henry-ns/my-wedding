@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ComponentProps } from "react";
@@ -11,8 +10,6 @@ type Props = Omit<ComponentProps<typeof Link>, "href"> & {
   alt: string;
 };
 
-const AnimatedImage = motion(Image);
-
 const style = tv({
   base: "z-50 cursor-pointer",
 });
@@ -20,15 +17,13 @@ const style = tv({
 export function Avatar({ src, alt, className, ...rest }: Props) {
   return (
     <Link className={style({ className })} href="/profile" {...rest}>
-      <AnimatedImage
+      <Image
         src={src}
         alt={alt}
-        width={80}
-        height={80}
+        width={56}
+        height={56}
         priority={false}
-        className="h-auto w-14 rounded-full border-4 border-secondary-500 transition-all"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="h-auto w-14 rounded-full border-4 border-secondary-500 hover:scale-110 active:scale-95 transition-transform duration-300"
       />
     </Link>
   );

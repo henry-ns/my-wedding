@@ -20,9 +20,11 @@ export function GiftCard({ gift }: Props) {
     <div className="flex flex-col group border-4 p-4 rounded-xl border-gray-200 w-full hover:border-primary-500 transition-all">
       <Image
         alt={image?.fields.title || ""}
-        src={`https://${image?.fields.file.url}`}
+        src={`https:${image?.fields.file.url}`}
         height={128}
-        width={128}
+        width={300}
+        priority={false}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="w-full h-32 object-cover bg-primary-100 rounded-lg mb-4 transition-all group-hover:-translate-y-6 group-hover:scale-y-[130%]"
       />
 

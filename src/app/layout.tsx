@@ -6,7 +6,7 @@ import { ToastProvider } from "~/components/ui/toast";
 import "~/styles/globals.css";
 
 const headingFont = Libre_Baskerville({
-  weight: ["700"],
+  weight: "700",
   subsets: ["latin"],
   variable: "--font-especial",
 });
