@@ -10,7 +10,7 @@ import { useDebouncedCallback } from "~/hooks/debounce";
 const styles = tv({
   slots: {
     container: [
-      "relative flex items-center space-x-4 px-4 py-2",
+      "relative flex items-center space-x-4 px-4 py-1 h-14",
       "border-4 rounded-xl stroke-gray-400",
       "transition-colors duration-200",
       "hover:border-primary-500 hover:stroke-primary-500",
