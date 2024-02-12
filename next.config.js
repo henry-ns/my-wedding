@@ -6,6 +6,7 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  optimizeFonts: false,
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [

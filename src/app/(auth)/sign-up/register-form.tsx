@@ -4,11 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useTransition } from "react";
 import { tv } from "tailwind-variants";
-
 import { z } from "zod";
+import { Input } from "~/components/ui/input";
 import { useToast } from "~/components/ui/toast";
 import { FormErrors, parseFormErrors } from "~/utils/parse-form-errors";
-import { Input } from "../../../components/ui/input";
 import { signUp } from "./actions";
 
 const buttonStyle = tv({

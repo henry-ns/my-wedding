@@ -2,15 +2,11 @@
 
 import { signOut } from "next-auth/react";
 import { LogOut } from "react-feather";
-
 import { Button } from "~/components/ui/button";
-import { useCart } from "~/hooks/cart";
 
 export function SignOutButton() {
-  const cart = useCart();
-
   function logout() {
-    cart.clean();
+    localStorage.removeItem("jh-cart-items");
     signOut();
   }
 

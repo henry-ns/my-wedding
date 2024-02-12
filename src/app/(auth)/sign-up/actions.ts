@@ -2,7 +2,6 @@
 
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
-
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
 

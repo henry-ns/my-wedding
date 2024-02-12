@@ -10,7 +10,7 @@ import { useDebouncedCallback } from "~/hooks/debounce";
 const styles = tv({
   slots: {
     container: [
-      "relative flex items-center space-x-4 px-4 py-2 mb-8",
+      "relative flex items-center space-x-4 px-4 py-2",
       "border-4 rounded-xl stroke-gray-400",
       "transition-colors duration-200",
       "hover:border-primary-500 hover:stroke-primary-500",
@@ -59,7 +59,11 @@ export function GiftFilter() {
   }
 
   return (
-    <form ref={formRef} method="GET" className="flex gap-6">
+    <form
+      ref={formRef}
+      method="GET"
+      className="flex gap-4 flex-col mb-8 md:flex-row"
+    >
       <div className={s.container({ full: true, hasSearch: !!searchParam })}>
         <MagnifyingGlassIcon className={s.icon()} />
         <input
@@ -73,11 +77,11 @@ export function GiftFilter() {
 
       <Select.Root name="order" value={order} onValueChange={selectOrder}>
         <Select.Trigger
+          aria-label="ordem"
           className={s.container({
             className:
-              "font-bold data-[placeholder]:text-gray-400 outline-none",
+              "font-bold data-[placeholder]:text-gray-400 outline-none flex justify-between",
           })}
-          aria-label="ordem"
         >
           <Select.Value placeholder="Ordem" className="select-none" />
           <Select.Icon>

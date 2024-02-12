@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
-
 import { getServerAuthSession } from "~/server/auth";
-
 import { CredentialSignInForm } from "../credential-sign-in-form";
 
 export default async function SignInPage() {

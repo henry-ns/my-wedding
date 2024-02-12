@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
-
+import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { useCartItem } from "~/hooks/cart.ts";
 import { Gift } from "~/types/gift";
@@ -18,9 +18,11 @@ export function GiftCard({ gift }: Props) {
 
   return (
     <div className="flex flex-col group border-4 p-4 rounded-xl border-gray-200 w-full hover:border-primary-500 transition-all">
-      <img
-        alt={image?.fields.title}
-        src={image?.fields.file.url}
+      <Image
+        alt={image?.fields.title || ""}
+        src={`https://${image?.fields.file.url}`}
+        height={128}
+        width={128}
         className="w-full h-32 object-cover bg-primary-100 rounded-lg mb-4 transition-all group-hover:-translate-y-6 group-hover:scale-y-[130%]"
       />
 

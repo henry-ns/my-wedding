@@ -1,7 +1,6 @@
+import { GiftList } from "~/app/(shopping)/gifts/components/gift-list";
 import { Pagination } from "~/components/ui/pagination";
 import { getAvailableGifts } from "~/server/services/gifts";
-
-import { GiftList } from "~/app/(shopping)/gifts/components/gift-list";
 
 type Props = {
   searchParams: {

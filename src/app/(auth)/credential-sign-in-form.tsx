@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
-
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useTransition } from "react";
 import { tv } from "tailwind-variants";
-import { useCart } from "~/hooks/cart";
 import { Input } from "../../components/ui/input";
 import { useToast } from "../../components/ui/toast";
 
@@ -29,7 +27,6 @@ export function CredentialSignInForm() {
   const [pending, startTransition] = useTransition();
   const router = useRouter();
   const toast = useToast();
-  const cart = useCart();
 
   function login(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,7 +44,7 @@ export function CredentialSignInForm() {
           throw new Error(response.error);
         }
 
-        cart.clean();
+        localStorage.removeItem("jh-cart-items");
         router.push("/");
         router.refresh();
       } catch (e) {

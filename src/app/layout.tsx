@@ -1,6 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Provider } from "jotai";
 import { Metadata } from "next";
 import { Lato, Libre_Baskerville } from "next/font/google";
 import { ToastProvider } from "~/components/ui/toast";
@@ -34,10 +33,7 @@ export default function RootLayout({ children }: Props) {
       <body
         className={`bg-bg ${bodyFont.variable} ${headingFont.variable} font-sans`}
       >
-        <Provider>
-          <ToastProvider>{children}</ToastProvider>
-        </Provider>
-
+        <ToastProvider>{children}</ToastProvider>
         <SpeedInsights />
         <Analytics />
       </body>

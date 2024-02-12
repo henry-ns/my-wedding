@@ -1,11 +1,9 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Image from "next/image";
-
+import { Suspense } from "react";
 import { env } from "~/env";
 import { capitalizeString } from "~/utils/capitalize-string";
-
-import { Suspense } from "react";
 import { HomeActions } from "./home-actions";
 
 const weddingDate = capitalizeString(

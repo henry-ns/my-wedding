@@ -1,6 +1,5 @@
 import { HomeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-
 import { CartButton } from "../../components/cart-button";
 import { GuestInfo } from "../guest-info";
 
