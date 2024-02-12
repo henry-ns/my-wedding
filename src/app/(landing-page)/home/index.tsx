@@ -5,6 +5,7 @@ import Image from "next/image";
 import { env } from "~/env";
 import { capitalizeString } from "~/utils/capitalize-string";
 
+import { Suspense } from "react";
 import { HomeActions } from "./home-actions";
 
 const weddingDate = capitalizeString(
@@ -44,8 +45,9 @@ export function HomeSection() {
         Vão Casar!
       </h2>
 
-      {/* TODO add lazy loading */}
-      <HomeActions />
+      <Suspense>
+        <HomeActions />
+      </Suspense>
     </section>
   );
 }

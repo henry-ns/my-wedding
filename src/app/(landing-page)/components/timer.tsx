@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { env } from "../../../env";
+import { env } from "~/env";
 import { TimerUnit } from "./timer-unit";
 
 type Timer = {

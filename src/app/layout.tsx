@@ -34,12 +34,11 @@ export default function RootLayout({ children }: Props) {
       <body
         className={`bg-bg ${bodyFont.variable} ${headingFont.variable} font-sans`}
       >
-        <SpeedInsights />
-
         <Provider>
           <ToastProvider>{children}</ToastProvider>
         </Provider>
 
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
