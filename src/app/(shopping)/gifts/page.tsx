@@ -1,14 +1,14 @@
 import { Pagination } from "~/components/ui/pagination";
 import { getAvailableGifts } from "~/server/services/gifts";
 
-import { GiftList } from "~/app/(shopping)/gifts/gift-list";
-import { GiftFilter } from "./gift-filter";
+import { GiftList } from "~/app/(shopping)/gifts/components/gift-list";
 
 type Props = {
   searchParams: {
     search?: string | string[];
     page?: string | string[];
     limit?: string | string[];
+    order?: string | string[];
   };
 };
 
@@ -16,12 +16,12 @@ export default async function GiftsPage({ searchParams }: Props) {
   const gifts = await getAvailableGifts({
     page: Number(searchParams.page?.toString() || "1"),
     limit: Number(searchParams.limit?.toString() || "12"),
+    order: searchParams.order?.toString() || "name",
     name: searchParams.search?.toString(),
   });
 
   return (
     <>
-      <GiftFilter />
       <GiftList gifts={gifts.items} />
 
       <Pagination

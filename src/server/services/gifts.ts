@@ -22,20 +22,34 @@ type Input = {
   limit: number;
   price?: number;
   name?: string;
+  order?: string;
+};
+
+const orderFilters: Record<string, string> = {
+  name: "fields.name",
+  "price-asc": "fields.priceInCents",
+  "price-desc": "-fields.priceInCents",
+  "quantity-asc": "fields.amount",
+  "quantity-desc": "-fields.amount",
 };
 
 export async function getAvailableGifts({
   page,
   limit,
   name,
+  order = "name",
 }: Input): Promise<Output> {
   try {
+    const orderFilter = orderFilters[order];
+    console.log({ orderFilter });
     const response = await contentful.getEntries({
       limit,
       skip: limit * (page - 1),
       content_type: "weddingGift",
       "fields.name[match]": name,
       "fields.amount[gte]": 1,
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      order: orderFilter ? ([orderFilter] as any) : undefined,
     });
 
     const { skip, total, items } = response;
