@@ -1,5 +1,7 @@
 "use client";
 
+import { SkeletonList } from "~/components/ui/skeletons/skeleton-list";
+import { useNavigation } from "~/hooks/navigation";
 import { Gift } from "~/types/gift";
 import { GiftCard } from "./gift-card";
 
@@ -8,6 +10,12 @@ type Props = {
 };
 
 export function GiftList({ gifts }: Props) {
+  const { isLoading } = useNavigation();
+
+  if (isLoading) {
+    return <SkeletonList size={12} />;
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {gifts.map((g) => (

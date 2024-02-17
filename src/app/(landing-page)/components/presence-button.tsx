@@ -23,7 +23,7 @@ export function PresenceButton({ presence, userId }: Props) {
 
         setChecker(!checker);
       } catch (e) {
-        console.error("ops");
+        console.error(e);
       }
     });
   }

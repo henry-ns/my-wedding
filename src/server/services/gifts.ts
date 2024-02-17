@@ -41,7 +41,6 @@ export async function getAvailableGifts({
 }: Input): Promise<Output> {
   try {
     const orderFilter = orderFilters[order];
-    console.log({ orderFilter });
     const response = await contentful.getEntries({
       limit,
       skip: limit * (page - 1),

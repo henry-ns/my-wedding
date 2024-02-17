@@ -75,7 +75,6 @@ function EditProfileForm() {
 
         router.refresh();
       } catch (e) {
-        console.error("eeee");
         toast.show({
           status: "error",
           title: "Erro ao atualizar seus dados",

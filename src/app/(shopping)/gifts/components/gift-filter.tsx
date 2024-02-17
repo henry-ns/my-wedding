@@ -2,10 +2,11 @@
 
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import * as Select from "@radix-ui/react-select";
-import { useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { ChangeEvent } from "react";
 import { tv } from "tailwind-variants";
 import { useDebouncedCallback } from "~/hooks/debounce";
+import { useNavigation } from "~/hooks/navigation";
 
 const styles = tv({
   slots: {
@@ -47,23 +48,38 @@ const orderOptions = [
 
 export function GiftFilter() {
   const params = useSearchParams();
-  const formRef = useRef<HTMLFormElement>(null);
-  const search = useDebouncedCallback(() => formRef.current?.submit(), 500);
+  const pathname = usePathname();
+  const { navigate } = useNavigation();
 
   const searchParam = params.get("search")?.toString();
-  const [order, setOrder] = useState(params.get("order")?.toString());
+  const order = params.get("order")?.toString();
+
+  const search = useDebouncedCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      const query = new URLSearchParams(params);
+      query.set("page", "1");
+
+      if (value) {
+        query.set("search", value);
+      } else {
+        query.delete("search");
+      }
+
+      navigate.push(`${pathname}?${query.toString()}`);
+    },
+    400,
+  );
 
   function selectOrder(value: string) {
-    setOrder(value);
-    formRef.current?.submit();
+    const query = new URLSearchParams(params);
+    query.set("page", "1");
+    query.set("order", value);
+    navigate.push(`${pathname}?${query.toString()}`);
   }
 
   return (
-    <form
-      ref={formRef}
-      method="GET"
-      className="flex gap-4 flex-col mb-8 md:flex-row"
-    >
+    <div className="flex gap-4 flex-col mb-8 md:flex-row">
       <div className={s.container({ full: true, hasSearch: !!searchParam })}>
         <MagnifyingGlassIcon className={s.icon()} />
         <input
@@ -75,7 +91,11 @@ export function GiftFilter() {
         />
       </div>
 
-      <Select.Root name="order" value={order} onValueChange={selectOrder}>
+      <Select.Root
+        name="order"
+        defaultValue={order}
+        onValueChange={selectOrder}
+      >
         <Select.Trigger
           aria-label="ordem"
           className={s.container({
@@ -111,6 +131,6 @@ export function GiftFilter() {
           </Select.Content>
         </Select.Portal>
       </Select.Root>
-    </form>
+    </div>
   );
 }
