@@ -30,7 +30,7 @@ export function PresenceForm({ userId, presence, available }: Props) {
   }
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex gap-1 flex-col sm:flex-row sm:gap-4 sm:items-center">
       <Button
         isDisabled={checker === true || !available}
         onClick={() => confirmPresence(true)}
@@ -38,7 +38,7 @@ export function PresenceForm({ userId, presence, available }: Props) {
       >
         Irei com certeza
       </Button>
-      <span>ou</span>
+      <span className="text-center">ou</span>
       <Button
         isDisabled={checker === false}
         isLoading={checker !== false && isLoading}

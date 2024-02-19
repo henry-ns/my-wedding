@@ -1,3 +1,4 @@
+import { Button } from "~/components/ui/button";
 import { env } from "~/env";
 import { LocationShape } from "./location-shape";
 
@@ -31,7 +32,7 @@ export function LocationSection() {
           </p>
         </div>
 
-        <div className="relative mr-10 flex-1 md:mr-0">
+        <div className="relative flex-1 flex flex-col sm:mr-10 md:mr-0">
           <iframe
             title="Mapa do local"
             src={env.NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL}
@@ -40,6 +41,15 @@ export function LocationSection() {
             referrerPolicy="no-referrer-when-downgrade"
             className="relative z-20 h-[300px] w-full border-8 border-secondary-500"
           />
+
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={env.NEXT_PUBLIC_GOOGLE_MAP_URL}
+            className="mt-4 ml-auto z-10"
+          >
+            <Button variant="secondary">Ver Mapa</Button>
+          </a>
 
           <div
             className={`

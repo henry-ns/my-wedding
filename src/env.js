@@ -34,6 +34,7 @@ export const env = createEnv({
 
   client: {
     NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL: z.string(),
+    NEXT_PUBLIC_GOOGLE_MAP_URL: z.string(),
     NEXT_PUBLIC_CEREMONY_ADDRESS: z.string(),
     NEXT_PUBLIC_PARTY_ADDRESS: z.string(),
     NEXT_PUBLIC_WEDDING_DATE: z.string().transform((v) => new Date(v)),
@@ -65,6 +66,7 @@ export const env = createEnv({
     NEXT_PUBLIC_WEDDING_DATE: process.env.NEXT_PUBLIC_WEDDING_DATE,
     NEXT_PUBLIC_PARTY_ADDRESS: process.env.NEXT_PUBLIC_PARTY_ADDRESS,
     NEXT_PUBLIC_CEREMONY_ADDRESS: process.env.NEXT_PUBLIC_CEREMONY_ADDRESS,
+    NEXT_PUBLIC_GOOGLE_MAP_URL: process.env.NEXT_PUBLIC_GOOGLE_MAP_URL,
     NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL:
       process.env.NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL,
   },
