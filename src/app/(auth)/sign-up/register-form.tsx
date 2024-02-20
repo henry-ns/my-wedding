@@ -73,7 +73,15 @@ export function RegisterForm() {
           title: "Conta criada com sucesso",
           description: "Agora só entrar com os dados cadastrados",
         });
-      } catch {
+      } catch (e) {
+        if ((e as Error)?.message === "401") {
+          toast.show({
+            status: "error",
+            title: "Já existe uma conta com esse email",
+          });
+          return;
+        }
+
         toast.show({
           status: "error",
           title: "Não foi possível criar sua conta",
