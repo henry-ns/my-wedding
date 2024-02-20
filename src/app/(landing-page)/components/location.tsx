@@ -19,10 +19,8 @@ export function LocationSection() {
           <p>
             O matrimônio é o sacramento no qual recebemos a graça de Deus, sendo
             o ponto mais importante desse dia, contamos com sua presença nessa
-            celebração que será realizada na{" "}
-            <strong className="font-bold">
-              {env.NEXT_PUBLIC_CEREMONY_ADDRESS}
-            </strong>
+            celebração que será realizada as <strong>16h</strong> na{" "}
+            <strong>{env.NEXT_PUBLIC_CEREMONY_ADDRESS}</strong>
           </p>
           <p className="mt-2">
             Após a cerimônia, vamos nos reunir e confraternizar{" "}
