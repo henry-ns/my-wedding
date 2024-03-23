@@ -1,6 +1,5 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
-
 import { SkeletonCard } from "./skeleton-card";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
@@ -11,7 +10,7 @@ export function SkeletonList({ className, size = 3, ...rest }: Props) {
   return (
     <div
       className={twMerge([
-        "w-full flex justify-start items-start flex-wrap gap-6",
+        "flex w-full flex-wrap items-start justify-start gap-6",
         className,
       ])}
       {...rest}

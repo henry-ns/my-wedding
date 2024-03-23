@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { Button } from "~/components/ui/button";
-import { Presence, setPresence } from "~/server/services/presences";
+import { type Presence, setPresence } from "~/server/services/presences";
 
 type Props = {
   userId: string;
@@ -30,7 +30,7 @@ export function PresenceForm({ userId, presence, available }: Props) {
   }
 
   return (
-    <div className="flex gap-1 flex-col sm:flex-row sm:gap-4 sm:items-center">
+    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
       <Button
         isDisabled={checker === true || !available}
         onClick={() => confirmPresence(true)}

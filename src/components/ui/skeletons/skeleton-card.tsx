@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function SkeletonCard({
@@ -8,7 +8,7 @@ export function SkeletonCard({
   return (
     <div
       className={twMerge(
-        "h-20 animate-pulse bg-gray-200 grow flex-1 group rounded-xl min-w-[220px] w-full",
+        "group h-20 w-full min-w-[220px] flex-1 grow animate-pulse rounded-xl bg-gray-200",
         className,
       )}
       {...rest}

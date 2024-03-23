@@ -8,13 +8,13 @@ export function LocationSection() {
       id="location"
       className="relative z-10 overflow-hidden px-10 lg:overflow-visible lg:px-32"
     >
-      <div className="mx-auto flex max-w-5xl flex-col space-y-10 md:space-y-20 xl:flex-row xl:items-center xl:space-x-20 xl:space-y-0">
+      <div className="mx-auto flex max-w-5xl flex-col space-y-10 xl:flex-row xl:items-center xl:space-x-20 md:space-y-20 xl:space-y-0">
         <div className="z-20 mt-6 flex flex-1 flex-col items-start text-start">
           <div className="relative">
-            <h3 className="relative z-20 mb-2 text-3xl font-bold md:mb-4">
+            <h3 className="relative z-20 mb-2 font-bold text-3xl md:mb-4">
               Cerimônia Religiosa
             </h3>
-            <div className="absolute -left-4 -top-3 z-10 h-14 w-14 rotate-45 animate-spin bg-gray-300/30" />
+            <div className="-left-4 -top-3 absolute z-10 h-14 w-14 rotate-45 animate-spin bg-gray-300/30" />
           </div>
           <p>
             O matrimônio é o sacramento no qual recebemos a graça de Deus, sendo
@@ -30,7 +30,7 @@ export function LocationSection() {
           </p>
         </div>
 
-        <div className="relative flex-1 flex flex-col sm:mr-10 md:mr-0">
+        <div className="relative flex flex-1 flex-col md:mr-0 sm:mr-10">
           <iframe
             title="Mapa do local"
             src={env.NEXT_PUBLIC_GOOGLE_MAP_EMBED_URL}
@@ -44,16 +44,15 @@ export function LocationSection() {
             target="_blank"
             rel="noopener noreferrer"
             href={env.NEXT_PUBLIC_GOOGLE_MAP_URL}
-            className="mt-4 ml-auto z-10"
+            className="z-10 mt-4 ml-auto"
           >
             <Button variant="secondary">Ver Mapa</Button>
           </a>
 
           <div
-            className={`
-              absolute left-[5%] top-[10%] z-0 h-full w-full bg-primary-500/50 
-              lg:-right-[8%] lg:left-auto lg:top-1/2 lg:h-[125%] lg:w-[40%] lg:-translate-y-1/2 
-            `}
+            className={
+              "lg:-right-[8%] lg:-translate-y-1/2 absolute top-[10%] left-[5%] z-0 h-full w-full bg-primary-500/50 lg:top-1/2 lg:left-auto lg:h-[125%] lg:w-[40%]"
+            }
           />
         </div>
       </div>

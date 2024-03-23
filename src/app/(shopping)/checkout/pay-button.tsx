@@ -1,14 +1,14 @@
 "use client";
 
 import { Payment } from "@mercadopago/sdk-react";
-import { IPaymentFormData } from "@mercadopago/sdk-react/bricks/payment/type";
+import type { IPaymentFormData } from "@mercadopago/sdk-react/bricks/payment/type";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { memo, useEffect, useState, useTransition } from "react";
 import { SkeletonCard } from "~/components/ui/skeletons/skeleton-card";
 import { useToast } from "~/components/ui/toast";
 import { getPreferenceId } from "~/server/services/preference";
-import { CartItem } from "~/types/gift";
+import type { CartItem } from "~/types/gift";
 import { processPayment } from "./actions/process-payment";
 
 type Props = {
@@ -63,7 +63,7 @@ export const PayButton = memo(({ items, totalPrice, onSuccess }: Props) => {
 
   if (loadingPreference) {
     return (
-      <div className="p-6 flex flex-col gap-4">
+      <div className="flex flex-col gap-4 p-6">
         <SkeletonCard className="h-12 flex-auto rounded-lg" />
         <SkeletonCard className="h-12 flex-auto rounded-lg" />
       </div>

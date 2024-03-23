@@ -32,20 +32,21 @@ export function PaymentInfo({ index, payment }: Props) {
     >
       <Suspense
         fallback={
-          <div className="flex items-start justify-between w-full">
+          <div className="flex w-full items-start justify-between">
             <div>
               <h4 className="flex-1 text-xl">
                 Presente #{index + 1} - Total:{" "}
                 {formatCentsToCurrency(payment.unitTotal)}
               </h4>
-              <div className="h-4 w-full max-w-40 animate-pulse bg-gray-200 rounded-full" />
+              <div className="h-4 w-full max-w-40 animate-pulse rounded-full bg-gray-200" />
             </div>
-            <div className="h-6 w-full max-w-40 animate-pulse bg-gray-200 rounded-full" />
+            <div className="h-6 w-full max-w-40 animate-pulse rounded-full bg-gray-200" />
           </div>
         }
       >
         <PaymentHeader
           index={index}
+          gifts={payment.gifts}
           unitTotal={payment.unitTotal}
           paymentId={payment.id}
         />
@@ -58,12 +59,12 @@ export function PaymentInfo({ index, payment }: Props) {
             height={80}
             alt={g.name}
             src={g.imageUrl}
-            className="rounded-lg h-20 w-20 object-cover"
+            className="h-20 w-20 rounded-lg object-cover"
           />
 
-          <div className="flex-1 flex flex-col">
+          <div className="flex flex-1 flex-col">
             <span className="text-lg">{g.name}</span>
-            <span className="text-xl font-bold">
+            <span className="font-bold text-xl">
               {g.quantity}x {formatCentsToCurrency(g.unitPrice)}
             </span>
           </div>

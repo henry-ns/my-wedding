@@ -1,7 +1,7 @@
 import type { IconProps } from "@radix-ui/react-icons/dist/types";
 import type { ButtonHTMLAttributes, Ref } from "react";
 import { forwardRef } from "react";
-import { VariantProps, tv } from "tailwind-variants";
+import { type VariantProps, tv } from "tailwind-variants";
 
 import { Spinner } from "./spinner";
 

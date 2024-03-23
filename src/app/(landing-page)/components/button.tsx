@@ -1,5 +1,5 @@
 import { UpdateIcon } from "@radix-ui/react-icons";
-import { tv, type VariantProps } from "tailwind-variants";
+import { type VariantProps, tv } from "tailwind-variants";
 
 const styles = tv({
   slots: {
@@ -53,10 +53,10 @@ export function Button({
         {isLoading && loadingText ? loadingText : children}
       </button>
 
-      <div className="absolute left-0 top-0 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-bg" />
-      <div className="button-0 absolute left-0 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-bg" />
-      <div className="absolute left-full top-0 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-bg" />
-      <div className="button-0 absolute left-full h-5 w-5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-bg" />
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 h-5 w-5 rotate-45 bg-bg" />
+      <div className="button-0 -translate-x-1/2 -translate-y-1/2 absolute left-0 h-5 w-5 rotate-45 bg-bg" />
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-full h-5 w-5 rotate-45 bg-bg" />
+      <div className="button-0 -translate-x-1/2 -translate-y-1/2 absolute left-full h-5 w-5 rotate-45 bg-bg" />
     </div>
   );
 }

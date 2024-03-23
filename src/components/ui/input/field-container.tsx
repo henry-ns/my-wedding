@@ -23,9 +23,9 @@ export function FieldContainer({
   return (
     <div className={styles({ className })} {...rest}>
       {label && (
-        <span className="ml-3 text-md text-gray-800">
+        <span className="ml-3 text-gray-800 text-md">
           {label}
-          {isRequired && <strong className="text-red-600 ml-1">*</strong>}
+          {isRequired && <strong className="ml-1 text-red-600">*</strong>}
         </span>
       )}
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
-  ReactNode,
+  type ReactNode,
   createContext,
   useContext,
   useEffect,

@@ -5,7 +5,7 @@ import { getSession } from "next-auth/react";
 import { headers } from "next/headers";
 
 import { mercadopago } from "~/server/mercadopago";
-import { CartItem } from "~/types/gift";
+import type { CartItem } from "~/types/gift";
 
 type Input = {
   items: CartItem[];

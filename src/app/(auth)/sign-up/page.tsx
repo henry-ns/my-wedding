@@ -3,8 +3,8 @@ import { RegisterForm } from "./register-form";
 
 export default function SignUpPage() {
   return (
-    <main className="relative min-h-screen text-gray-900 bg-bg flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-primary-100 p-8 shadow-sm rounded-lg flex flex-col items-center">
+    <main className="relative flex min-h-screen items-center justify-center bg-bg p-4 text-gray-900">
+      <div className="flex w-full max-w-md flex-col items-center rounded-lg bg-primary-100 p-8 shadow-sm">
         <Image
           src="/logo.svg"
           alt="logo"
@@ -12,7 +12,7 @@ export default function SignUpPage() {
           height="100"
           priority={false}
         />
-        <h1 className="text-2xl font-sans mb-8 text-gray-600 mt-2">
+        <h1 className="mt-2 mb-8 font-sans text-2xl text-gray-600">
           Cadastrar
         </h1>
 

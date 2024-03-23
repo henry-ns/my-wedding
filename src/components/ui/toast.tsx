@@ -149,14 +149,9 @@ export function ToastProvider({ children }: ProviderProps) {
         ))}
 
         <RadixToast.Viewport
-          className={`
-            m-0 [--viewport-padding:_25px] p-[var(--viewport-padding)]
-            fixed bottom-0 right-0
-            flex flex-col gap-[10px]
-            w-[390px] max-w-[100vw]
-            list-none outline-none
-            z-50
-          `}
+          className={
+            "fixed right-0 bottom-0 z-50 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]"
+          }
         />
       </RadixToast.Provider>
     </toastContext.Provider>

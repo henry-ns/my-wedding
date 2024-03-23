@@ -2,7 +2,7 @@
 
 import { eq } from "drizzle-orm";
 import { contentful } from "~/server/contentful";
-import { Gift } from "~/types/gift";
+import type { Gift } from "~/types/gift";
 import { db } from "../db";
 import { gifts } from "../db/schema";
 
@@ -46,7 +46,7 @@ export async function getAvailableGifts({
       skip: limit * (page - 1),
       content_type: "weddingGift",
       "fields.name[match]": name,
-      "fields.amount[gte]": 1,
+      // "fields.amount[gte]": 1,
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       order: orderFilter ? ([orderFilter] as any) : undefined,
     });
@@ -54,7 +54,10 @@ export async function getAvailableGifts({
     const { skip, total, items } = response;
 
     return {
-      items: items.map((t) => t.fields) as Gift[],
+      items: items.map((t) => ({
+        ...t.fields,
+        amount: t.fields.amount || 1,
+      })) as Gift[],
       meta: {
         itemsPerPage: response.limit,
         totalItems: total,
@@ -79,4 +82,8 @@ export async function getAvailableGifts({
 
 export async function getUserGifts(userId: string) {
   return db.select().from(gifts).where(eq(gifts.buyerId, userId));
+}
+
+export async function getAllGifts() {
+  return db.select().from(gifts);
 }

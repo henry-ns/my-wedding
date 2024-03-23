@@ -11,14 +11,14 @@ export function CartButton() {
   return (
     <Link
       href="/checkout"
-      className="relative ml-auto mr-4 hover:bg-gray-200/30 p-2 transition-all hover:scale-110 active:scale-95 rounded-md"
+      className="relative mr-4 ml-auto rounded-md p-2 transition-all active:scale-95 hover:scale-110 hover:bg-gray-200/30"
     >
       {totalItems > 0 && (
-        <span className="absolute bottom-1 left-1 h-5 w-5 bg-secondary-500 text-sm flex items-center justify-center rounded-full text-white">
+        <span className="absolute bottom-1 left-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-500 text-sm text-white">
           {totalItems}
         </span>
       )}
-      <ShoppingCart className="w-auto h-8 text-white" />
+      <ShoppingCart className="h-8 w-auto text-white" />
     </Link>
   );
 }

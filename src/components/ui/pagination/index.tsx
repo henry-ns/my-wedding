@@ -22,7 +22,7 @@ export function Pagination({
   const lastPossibleItem = Math.min(totalItems, lastItem);
 
   return (
-    <div className="w-full flex space-x-2 items-center justify-between mt-8">
+    <div className="mt-8 flex w-full items-center justify-between space-x-2">
       <p className="text-lg">
         <strong>{firstItem}</strong>
         {" - "}

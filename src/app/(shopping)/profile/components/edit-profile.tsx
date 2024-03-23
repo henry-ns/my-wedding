@@ -3,7 +3,7 @@
 import { Cross2Icon, Pencil2Icon } from "@radix-ui/react-icons";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState, useTransition } from "react";
+import { type FormEvent, useState, useTransition } from "react";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
@@ -74,7 +74,7 @@ function EditProfileForm() {
         });
 
         router.refresh();
-      } catch (e) {
+      } catch (_e) {
         toast.show({
           status: "error",
           title: "Erro ao atualizar seus dados",
@@ -101,9 +101,9 @@ function EditProfileForm() {
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="p-1 -mr-1 rounded transition-colors hover:bg-gray-200"
+              className="-mr-1 rounded p-1 transition-colors hover:bg-gray-200"
             >
-              <Cross2Icon className="w-6 h-auto" />
+              <Cross2Icon className="h-auto w-6" />
             </button>
           </div>
 
@@ -117,7 +117,7 @@ function EditProfileForm() {
 
             <Button
               type="submit"
-              className="ml-auto mt-6"
+              className="mt-6 ml-auto"
               isLoading={isUpdating}
               loadingText="Salvando..."
             >

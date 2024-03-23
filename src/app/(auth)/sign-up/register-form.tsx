@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState, useTransition } from "react";
+import { type FormEvent, useState, useTransition } from "react";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
 import { Input } from "~/components/ui/input";
 import { useToast } from "~/components/ui/toast";
-import { FormErrors, parseFormErrors } from "~/utils/parse-form-errors";
+import { type FormErrors, parseFormErrors } from "~/utils/parse-form-errors";
 import { signUp } from "./actions";
 
 const buttonStyle = tv({
@@ -92,7 +92,7 @@ export function RegisterForm() {
   }
 
   return (
-    <form onSubmit={submit} className="flex flex-col w-full">
+    <form onSubmit={submit} className="flex w-full flex-col">
       <Input
         label="Nome"
         name="name"
@@ -126,7 +126,7 @@ export function RegisterForm() {
 
       <Link
         href="/sign-in"
-        className="w-full text-center text-gray-500 hover:underline overflow-"
+        className="overflow- w-full text-center text-gray-500 hover:underline"
       >
         Voltar
       </Link>

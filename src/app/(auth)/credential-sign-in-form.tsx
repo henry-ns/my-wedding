@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useTransition } from "react";
+import { type FormEvent, useTransition } from "react";
 import { tv } from "tailwind-variants";
 import { Input } from "../../components/ui/input";
 import { useToast } from "../../components/ui/toast";
@@ -60,7 +60,7 @@ export function CredentialSignInForm() {
   }
 
   return (
-    <form onSubmit={login} className="flex flex-col w-full">
+    <form onSubmit={login} className="flex w-full flex-col">
       <Input
         label="Email"
         name="email"

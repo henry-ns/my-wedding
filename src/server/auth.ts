@@ -1,9 +1,9 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import {
-  Session,
-  getServerSession,
   type DefaultSession,
   type NextAuthOptions,
+  type Session,
+  getServerSession,
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 

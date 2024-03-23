@@ -3,7 +3,7 @@
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import * as Select from "@radix-ui/react-select";
 import { usePathname, useSearchParams } from "next/navigation";
-import { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
 import { tv } from "tailwind-variants";
 import { useDebouncedCallback } from "~/hooks/debounce";
 import { useNavigation } from "~/hooks/navigation";
@@ -79,7 +79,7 @@ export function GiftFilter() {
   }
 
   return (
-    <div className="flex gap-4 flex-col mb-8 md:flex-row">
+    <div className="mb-8 flex flex-col gap-4 md:flex-row">
       <div className={s.container({ full: true, hasSearch: !!searchParam })}>
         <MagnifyingGlassIcon className={s.icon()} />
         <input
@@ -100,7 +100,7 @@ export function GiftFilter() {
           aria-label="ordem"
           className={s.container({
             className:
-              "font-bold data-[placeholder]:text-gray-400 outline-none flex justify-between",
+              "flex justify-between font-bold outline-none data-[placeholder]:text-gray-400",
           })}
         >
           <Select.Value placeholder="Ordem" className="select-none" />
@@ -113,14 +113,14 @@ export function GiftFilter() {
           <Select.Content
             sideOffset={4}
             position="popper"
-            className="bg-white shadow border-4 p-2 rounded-lg overflow-hidden"
+            className="overflow-hidden rounded-lg border-4 bg-white p-2 shadow"
           >
             <Select.Viewport className="space-y-1">
               {orderOptions.map((i) => (
                 <Select.Item
                   key={i.value}
                   value={i.value}
-                  className="cursor-pointer py-2 px-3 rounded-md data-[state=checked]:bg-primary-500 data-[state=checked]:text-white hover:bg-gray-200 transition-colors outline-none"
+                  className="cursor-pointer rounded-md px-3 py-2 outline-none transition-colors data-[state=checked]:bg-primary-500 hover:bg-gray-200 data-[state=checked]:text-white"
                 >
                   <Select.ItemText className="font-bold text-gray-700">
                     {i.label}

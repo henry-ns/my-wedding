@@ -23,23 +23,23 @@ export default function CartPage() {
 
   return (
     <SessionProvider>
-      <div className="border-2 border-dashed rounded-lg p-6">
+      <div className="rounded-lg border-2 border-dashed p-6">
         {cart.items.map((i, index) => (
           <Fragment key={i.slug}>
-            {index > 0 && <div className="bg-gray-200 h-0.5 w-full my-4" />}
+            {index > 0 && <div className="my-4 h-0.5 w-full bg-gray-200" />}
 
-            <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex flex-wrap items-center gap-4">
               <Image
                 width={80}
                 height={80}
                 alt={i.name}
                 src={`https:${i.images[0]?.fields.file.url}`}
-                className="rounded-lg h-20 w-20 object-cover"
+                className="h-20 w-20 rounded-lg object-cover"
               />
 
-              <div className="flex-1 flex flex-col">
+              <div className="flex flex-1 flex-col">
                 <span className="text-lg">{i.name}</span>
-                <span className="text-xl font-bold">
+                <span className="font-bold text-xl">
                   {formatCentsToCurrency(i.priceInCents)}
                 </span>
               </div>
@@ -47,7 +47,7 @@ export default function CartPage() {
               <div className="flex items-center space-x-4">
                 <Button
                   variant="secondary"
-                  className="rounded-lg w-10 p-0"
+                  className="w-10 rounded-lg p-0"
                   onClick={() => {
                     const quantity = i.selectedAmount - 1;
 
@@ -58,7 +58,7 @@ export default function CartPage() {
                     cart.updateQuantity({ slug: i.slug, quantity });
                   }}
                 >
-                  <ChevronLeftIcon className="stroke-white w-8 h-8 p-1.5" />
+                  <ChevronLeftIcon className="h-8 w-8 stroke-white p-1.5" />
                 </Button>
                 <Input
                   name="amount"
@@ -79,7 +79,7 @@ export default function CartPage() {
                 />
                 <Button
                   variant="primary"
-                  className="rounded-lg w-10 p-0"
+                  className="w-10 rounded-lg p-0"
                   isDisabled={i.selectedAmount >= i.amount}
                   onClick={() =>
                     cart.updateQuantity({
@@ -88,7 +88,7 @@ export default function CartPage() {
                     })
                   }
                 >
-                  <ChevronRightIcon className="stroke-white w-8 h-8 p-1.5" />
+                  <ChevronRightIcon className="h-8 w-8 stroke-white p-1.5" />
                 </Button>
               </div>
             </div>
@@ -97,7 +97,7 @@ export default function CartPage() {
 
         {cart.items.length === 0 && (
           <>
-            <h3 className="text-center text-3xl font-gray-500 font-sans mb-4">
+            <h3 className="mb-4 text-center font-gray-500 font-sans text-3xl">
               Carrinho vazio
             </h3>
             <Link href="/gifts" prefetch>
@@ -108,10 +108,10 @@ export default function CartPage() {
       </div>
 
       {cart.items.length > 0 && (
-        <div className="border-2 rounded-lg mt-8">
-          <div className="flex items-end justify-between space-x-4 mb-4 px-6 pt-6">
-            <strong className="text-3xl font-bold">Total</strong>
-            <span className="text-3xl font-bold text-primary-500">
+        <div className="mt-8 rounded-lg border-2">
+          <div className="mb-4 flex items-end justify-between space-x-4 px-6 pt-6">
+            <strong className="font-bold text-3xl">Total</strong>
+            <span className="font-bold text-3xl text-primary-500">
               {formatCentsToCurrency(cart.totalPrice)}
             </span>
           </div>

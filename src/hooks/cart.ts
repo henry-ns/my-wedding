@@ -2,7 +2,7 @@
 
 import { atom, useAtomValue, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { CartItem, Gift } from "~/types/gift";
+import type { CartItem, Gift } from "~/types/gift";
 
 const cartItemsAtom = atomWithStorage<CartItem[]>("jh-cart-items", []);
 

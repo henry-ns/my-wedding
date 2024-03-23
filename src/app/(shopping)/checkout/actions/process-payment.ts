@@ -1,12 +1,12 @@
 "use server";
 
-import { IPaymentFormData } from "@mercadopago/sdk-react/bricks/payment/type";
+import type { IPaymentFormData } from "@mercadopago/sdk-react/bricks/payment/type";
 import { Payment } from "mercadopago";
-import { PaymentCreateData } from "mercadopago/dist/clients/payment/create/types";
+import type { PaymentCreateData } from "mercadopago/dist/clients/payment/create/types";
 import { db } from "~/server/db";
 import { payments } from "~/server/db/schema";
 import { mercadopago } from "~/server/mercadopago";
-import { CartItem } from "~/types/gift";
+import type { CartItem } from "~/types/gift";
 import { buyGifts } from "./buy-gifts";
 
 type Input = {

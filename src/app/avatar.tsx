@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { tv } from "tailwind-variants";
 
 type Props = Omit<ComponentProps<typeof Link>, "href"> & {
@@ -23,7 +23,7 @@ export function Avatar({ src, alt, className, ...rest }: Props) {
         width={56}
         height={56}
         priority={false}
-        className="h-auto w-14 rounded-full border-4 border-secondary-500 hover:scale-110 active:scale-95 transition-transform duration-300"
+        className="h-auto w-14 rounded-full border-4 border-secondary-500 transition-transform duration-300 active:scale-95 hover:scale-110"
       />
     </Link>
   );

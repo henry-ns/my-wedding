@@ -1,4 +1,4 @@
-import { VariantProps, tv } from "tailwind-variants";
+import { type VariantProps, tv } from "tailwind-variants";
 
 const style = tv({
   base: "text-gray-300/50 animate-spin",

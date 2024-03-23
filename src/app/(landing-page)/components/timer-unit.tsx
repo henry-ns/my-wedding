@@ -18,11 +18,11 @@ const styles = tv({
 export function TimerUnit({ value, label, className }: Props) {
   return (
     <div className={styles({ className })}>
-      <div className="flex -rotate-45 flex-col items-center justify-center">
-        <span className="font-header  text-4xl text-primary-800 lg:text-6xl">
+      <div className="-rotate-45 flex flex-col items-center justify-center">
+        <span className="font-header text-4xl text-primary-800 lg:text-6xl">
           {value}
         </span>
-        <span className="-mt-2 text-base font-bold uppercase text-secondary-500">
+        <span className="-mt-2 font-bold text-base text-secondary-500 uppercase">
           {label}
         </span>
       </div>

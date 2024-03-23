@@ -57,7 +57,7 @@ export function TimerSection() {
       id="timer"
       className="relative z-10 flex items-center justify-center py-64"
     >
-      <div className="absolute left-0 top-0 h-[60%] w-5 translate-y-1/2 bg-primary-300/80 sm:w-10 md:w-20" />
+      <div className="absolute top-0 left-0 h-[60%] w-5 translate-y-1/2 bg-primary-300/80 md:w-20 sm:w-10" />
 
       <div>
         <div className="grid grid-cols-2 gap-1 md:flex md:space-x-5">
@@ -66,10 +66,10 @@ export function TimerSection() {
           <TimerUnit label="minutos" value={minutes} />
           <TimerUnit label="segundos" value={seconds} />
 
-          <div className="absolute left-1/2 top-1/2 mt-3 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rotate-45 animate-pulse bg-gray-200/50 md:hidden" />
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 mt-3 h-32 w-32 rotate-45 animate-pulse bg-gray-200/50 md:hidden" />
         </div>
 
-        <div className="mx-auto -mt-6 flex justify-center md:space-x-44 lg:space-x-52">
+        <div className="-mt-6 mx-auto flex justify-center lg:space-x-52 md:space-x-44">
           <Shape />
           <Shape />
         </div>
@@ -80,8 +80,8 @@ export function TimerSection() {
 
 function Shape() {
   return (
-    <div className="flex animate-[bounce-slow_6s_linear_infinite] items-center justify-center md:h-32 md:w-32 lg:h-40 lg:w-40">
-      <div className="rotate-45 bg-gray-200/50 md:h-24 md:w-24 lg:h-32 lg:w-32" />
+    <div className="flex animate-[bounce-slow_6s_linear_infinite] items-center justify-center lg:h-40 md:h-32 lg:w-40 md:w-32">
+      <div className="rotate-45 bg-gray-200/50 lg:h-32 md:h-24 lg:w-32 md:w-24" />
     </div>
   );
 }

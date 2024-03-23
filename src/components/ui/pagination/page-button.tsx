@@ -23,7 +23,7 @@ export function PageButton({ isActive, page }: Props) {
   return (
     <Link
       href={{ query: { page } }}
-      className="hover:scale-110 active:scale-95 transition-transform"
+      className="transition-transform active:scale-95 hover:scale-110"
     >
       <Button variant="outline" className={styles({ isActive })}>
         {page}

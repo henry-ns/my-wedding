@@ -1,17 +1,42 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "organizeImports": {
     "enabled": true
+  },
+  "files": {
+    "ignore": [
+      "./src/utils/env.ts"
+    ]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "performance": {
+        "all": true
+      },
+      "correctness": {
+        "noUnusedImports": "warn",
+        "noUnnecessaryContinue": "warn",
+        "noUnusedVariables": "warn"
+      },
+      "nursery": {
+        "noDuplicateJsonKeys": "warn",
+        "useSortedClasses": "warn",
+        "noUselessTernary": "warn"
+      },
+      "style": {
+        "useNamingConvention": {
+          "level": "off",
+          "options": {
+            "enumMemberCase": "CONSTANT_CASE"
+          }
+        }
+      }
     }
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space",
-    "formatWithErrors": true
+    "indentStyle": "space"
   }
 }

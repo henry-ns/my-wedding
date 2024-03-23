@@ -27,42 +27,42 @@ export default async function ProfilePage() {
 
   return (
     <main className="flex flex-col overflow-hidden">
-      <header className="flex flex-wrap gap-4 items-end justify-between">
-        <h2 className="font-sans text-3xl font-bold">Meu Perfil</h2>
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <h2 className="font-bold font-sans text-3xl">Meu Perfil</h2>
 
         <EditProfile />
         <SignOutButton />
       </header>
 
-      <dl className="flex flex-wrap gap-4 mt-8">
-        <div className="grow p-4 min-w-64 rounded-xl bg-primary-100">
+      <dl className="mt-8 flex flex-wrap gap-4">
+        <div className="min-w-64 grow rounded-xl bg-primary-100 p-4">
           <dt className="font-bold text-primary-800">Nome</dt>
           <dd className="text-lg">{user?.name}</dd>
         </div>
-        <div className="grow p-4 min-w-64 rounded-xl bg-primary-100">
+        <div className="min-w-64 grow rounded-xl bg-primary-100 p-4">
           <dt className="font-bold text-primary-800">Email</dt>
           <dd className="text-lg">{user?.email}</dd>
         </div>
       </dl>
 
       <section className="mt-8 flex flex-col">
-        <h3 className="font-bold text-xl font-sans">Presença</h3>
-        <h4 className="text-lg font-sans ">
+        <h3 className="font-bold font-sans text-xl">Presença</h3>
+        <h4 className="font-sans text-lg">
           Por favor, poderia nos informar sua presença no nosso casamento?
         </h4>
         {available ? (
-          <div className="flex gap-3 items-center bg-orange-200 rounded-md px-4 py-3 mr-auto mt-2 mb-4">
+          <div className="mt-2 mr-auto mb-4 flex items-center gap-3 rounded-md bg-orange-200 px-4 py-3">
             <InfoCircledIcon className="h-5 w-fit text-orange-800" />
-            <h5 className="text-orange-800 font-bold">
+            <h5 className="font-bold text-orange-800">
               É possível marcar presença até no máximo dia{" "}
               {format(limitDate, "dd 'de' LLLL", { locale: ptBR })}, 30 dias
               antes do casamento.
             </h5>
           </div>
         ) : (
-          <div className="flex gap-3 items-center bg-red-200 rounded-md px-4 py-3 mr-auto mt-2 mb-4">
+          <div className="mt-2 mr-auto mb-4 flex items-center gap-3 rounded-md bg-red-200 px-4 py-3">
             <InfoCircledIcon className="h-5 w-fit text-red-800" />
-            <h5 className="text-orange-800 font-bold">
+            <h5 className="font-bold text-orange-800">
               Não é mais possível marcar presença.
             </h5>
           </div>
@@ -76,7 +76,7 @@ export default async function ProfilePage() {
       </section>
 
       <section className="mt-8">
-        <h3 className="font-bold text-xl font-sans mb-4">Meus Presentes</h3>
+        <h3 className="mb-4 font-bold font-sans text-xl">Meus Presentes</h3>
         <ul className="space-y-4">
           {payments.map((p, i) => (
             <PaymentInfo key={p.id} payment={p} index={i} />

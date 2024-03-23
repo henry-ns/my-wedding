@@ -22,24 +22,24 @@ export function HomeSection() {
         {weddingDate}
       </h3>
 
-      <div className="a animate-spin border-8 border-primary-300 sm:border-[10px] md:border-[19px]">
+      <div className="a animate-spin border-8 border-primary-300 md:border-[19px] sm:border-[10px]">
         <Image
           alt="O Casal"
           src="/photo.jpg"
           width="286"
           height="286"
-          className="h-auto w-52 -rotate-45 animate-spin-reverse sm:h-56 sm:w-56 md:h-[286px] md:w-[286px] rounded-full"
+          className="-rotate-45 h-auto w-52 animate-spin-reverse rounded-full md:h-[286px] sm:h-56 md:w-[286px] sm:w-56"
           priority
         />
       </div>
 
       <div className="-ml-2 mb-2 border-b-4 border-b-secondary-300 px-2 md:mb-4 md:px-4">
-        <h1 className="relative text-3xl font-bold tracking-widest text-gray-800 sm:text-4xl md:text-5xl font-especial">
+        <h1 className="relative font-bold font-especial text-3xl text-gray-800 tracking-widest md:text-5xl sm:text-4xl">
           Henrique & Jennifer
         </h1>
       </div>
 
-      <h2 className="relative text-xl uppercase tracking-[0.25rem] text-secondary-500 md:text-2xl">
+      <h2 className="relative text-secondary-500 text-xl uppercase tracking-[0.25rem] md:text-2xl">
         Vão Casar!
       </h2>
 
