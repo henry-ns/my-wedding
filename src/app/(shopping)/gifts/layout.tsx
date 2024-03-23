@@ -1,5 +1,5 @@
 import { NavigationProvider } from "~/hooks/navigation";
-import { GiftFilter } from "./components/gift-filter";
+import { GiftFilter } from "./_components/gift-filter";
 
 type Props = {
   children: React.ReactNode;

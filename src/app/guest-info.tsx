@@ -1,3 +1,5 @@
+"use server";
+
 import { getServerAuthSession } from "../server/auth";
 import { Avatar } from "./avatar";
 

@@ -7,11 +7,11 @@ import { env } from "~/env";
 import { requireAuthentication } from "~/server/auth";
 import { getUserPresence } from "~/server/services/presences";
 import { getUser } from "~/server/services/user";
-import { getUserPayments } from "./actions/get-user-payments";
-import { EditProfile } from "./components/edit-profile";
-import { PaymentInfo } from "./components/payment-info";
-import { PresenceForm } from "./components/presence-form";
-import { SignOutButton } from "./components/sign-out-button";
+import { getUserPayments } from "./_server/get-user-payments";
+import { EditProfile } from "./_components/edit-profile";
+import { PaymentInfo } from "./_components/payment-info";
+import { PresenceForm } from "./_components/presence-form";
+import { SignOutButton } from "./_components/sign-out-button";
 
 export default async function ProfilePage() {
   const session = await requireAuthentication("profile");

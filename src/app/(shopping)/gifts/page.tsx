@@ -1,4 +1,4 @@
-import { GiftList } from "~/app/(shopping)/gifts/components/gift-list";
+import { GiftList } from "~/app/(shopping)/gifts/_components/gift-list";
 import { Pagination } from "~/components/ui/pagination";
 import { getAvailableGifts } from "~/server/services/gifts";
 

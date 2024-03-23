@@ -1,14 +1,20 @@
-import { HomeIcon } from "@radix-ui/react-icons";
+import { DashboardIcon, HomeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { CartButton } from "../../components/cart-button";
 import { GuestInfo } from "../guest-info";
 import { ShoppingBag } from "react-feather";
+import { getServerAuthSession } from "~/server/auth";
 
-export function Header() {
+const admins = ["enrque.ns@gmail.com", "jenniferregina.csilva@gmail.com"];
+
+export async function Header() {
+  const session = await getServerAuthSession();
+  const isAdmin = admins.includes(session?.user.email || "");
+
   return (
     <header className="sticky top-0 left-0 w-full">
       <div className="w-full bg-primary-400">
-        <div className="mx-auto flex gap-4 w-ful max-w-7xl items-center justify-between px-8 py-3">
+        <div className="mx-auto flex w-ful max-w-7xl items-center justify-between gap-4 px-8 py-3">
           <Link
             href="/"
             className="-ml-2 rounded-md p-2 transition-all active:scale-95 hover:scale-110 hover:bg-gray-200/30"
@@ -21,6 +27,15 @@ export function Header() {
           >
             <ShoppingBag className="h-8 w-auto text-white" />
           </Link>
+
+          {isAdmin && (
+            <Link
+              href="/dashboard"
+              className="rounded-md p-2 transition-all active:scale-95 hover:scale-110 hover:bg-gray-200/30"
+            >
+              <DashboardIcon className="h-8 w-auto text-white" />
+            </Link>
+          )}
 
           <CartButton />
           <GuestInfo />

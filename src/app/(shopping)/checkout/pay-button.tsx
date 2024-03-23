@@ -9,7 +9,7 @@ import { SkeletonCard } from "~/components/ui/skeletons/skeleton-card";
 import { useToast } from "~/components/ui/toast";
 import { getPreferenceId } from "~/server/services/preference";
 import type { CartItem } from "~/types/gift";
-import { processPayment } from "./actions/process-payment";
+import { processPayment } from "./_server/process-payment";
 
 type Props = {
   items: CartItem[];

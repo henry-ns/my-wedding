@@ -19,7 +19,6 @@ export default async function ShoppingLayout({ children }: Props) {
     <Provider>
       <div className="flex flex-col overflow-hidden">
         <Header />
-
         <main className="mx-auto w-full max-w-7xl p-8">{children}</main>
       </div>
     </Provider>
