@@ -1,7 +1,7 @@
 import { Provider } from "jotai";
 import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
-import { Header } from "../(shopping)/header";
+import { Header } from "../../(shopping)/header";
 
 type Props = {
   children: React.ReactNode;
