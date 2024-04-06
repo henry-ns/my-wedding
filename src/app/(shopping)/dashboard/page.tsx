@@ -5,6 +5,7 @@ import { PaymentInfo } from "./_components/payment-info";
 import { getAllPayments } from "./_server/get-all-payments";
 import { getUserPresences } from "./_server/get-user-presences";
 import { twMerge } from "tailwind-merge";
+import { tv } from "tailwind-variants";
 
 type Props = {
   className?: string;
@@ -25,6 +26,20 @@ function Info({ className, label, value }: Props) {
     </div>
   );
 }
+
+const presenceStyle = tv({
+  base: "flex flex-col rounded-xl p-4 border",
+  variants: {
+    response: {
+      yes: "bg-primary-100 border-primary-200",
+      no: "bg-red-100 border-red-200",
+      default: "bg-gray-100",
+    },
+  },
+  defaultVariants: {
+    response: "default",
+  },
+});
 
 export default async function Dashboard() {
   const [payments, presences] = await Promise.all([
@@ -64,7 +79,7 @@ export default async function Dashboard() {
             {presences.items.map((p) => (
               <li
                 key={p.id}
-                className="flex flex-col rounded-xl bg-primary-100 p-4"
+                className={presenceStyle({ response: p.response })}
               >
                 <h4 className="flex-1 text-xl">{p.name}</h4>
 
