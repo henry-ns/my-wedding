@@ -1,10 +1,36 @@
+import { format } from "date-fns";
 import { DashboardProvider } from "./_components/dashboard-context";
 import { GiftsInfo } from "./_components/gifts-info";
 import { PaymentInfo } from "./_components/payment-info";
 import { getAllPayments } from "./_server/get-all-payments";
+import { getUserPresences } from "./_server/get-user-presences";
+import { twMerge } from "tailwind-merge";
+
+type Props = {
+  className?: string;
+  label: string;
+  value: number;
+};
+
+function Info({ className, label, value }: Props) {
+  return (
+    <div
+      className={twMerge(
+        "flex flex-1 grow flex-col whitespace-nowrap rounded-xl border bg-primary-100 p-4",
+        className,
+      )}
+    >
+      <p className="text-gray-800 text-lg">{label}</p>
+      <strong className="text-primary-800 text-xl">{value}</strong>
+    </div>
+  );
+}
 
 export default async function Dashboard() {
-  const payments = await getAllPayments();
+  const [payments, presences] = await Promise.all([
+    getAllPayments(),
+    getUserPresences(),
+  ]);
 
   return (
     <main className="flex flex-col overflow-hidden">
@@ -14,13 +40,55 @@ export default async function Dashboard() {
 
       <DashboardProvider>
         <section className="mt-8">
-          <GiftsInfo />
+          <h3 className="mb-4 font-bold font-sans text-xl">Presenças</h3>
+
+          <ul className="flex flex-wrap gap-4">
+            <Info
+              className="border-green-300 bg-green-200"
+              label="Vão"
+              value={presences.meta.yes}
+            />
+            <Info
+              className="border-red-300 bg-red-200"
+              label="Não vão"
+              value={presences.meta.no}
+            />
+            <Info
+              className="border-gray-300 bg-gray-200"
+              label="Não responderam"
+              value={presences.meta.noResponde}
+            />
+          </ul>
+
+          <ul className="mt-8 space-y-4">
+            {presences.items.map((p) => (
+              <li
+                key={p.id}
+                className="flex flex-col rounded-xl bg-primary-100 p-4"
+              >
+                <h4 className="flex-1 text-xl">{p.name}</h4>
+
+                <p>
+                  {p.presence
+                    ? p.presence.check
+                      ? "Confirmou"
+                      : "Confirmou que não vai"
+                    : "Não respondeu"}
+                </p>
+
+                {!!p.presence && (
+                  <p>{format(p.presence.checkedAt, "dd/MM/yyyy 'às' hh:mm")}</p>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="mt-8">
           <h3 className="mb-4 font-bold font-sans text-xl">Presentes</h3>
+          <GiftsInfo />
 
-          <ul className="space-y-4">
+          <ul className="mt-8 space-y-4">
             {payments.map((p, i) => (
               <PaymentInfo key={p.id} payment={p} index={i} />
             ))}

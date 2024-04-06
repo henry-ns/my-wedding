@@ -5,7 +5,7 @@ import { GuestInfo } from "../guest-info";
 import { ShoppingBag } from "react-feather";
 import { getServerAuthSession } from "~/server/auth";
 
-const admins = ["enrque.ns@gmail.com", "jenniferregina.csilva@gmail.com"];
+const admins = ["enrque.ns@gmail.com", "jenniferregina.csilva@gmail.com", "1@henrique.pw"];
 
 export async function Header() {
   const session = await getServerAuthSession();

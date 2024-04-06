@@ -18,12 +18,17 @@ export const users = sqliteTable("user", {
 
 export const presences = sqliteTable("presence", {
   id: text("id").notNull().primaryKey(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull(),
   check: integer("check", { mode: "boolean" }).notNull().default(false),
   checkedAt: integer("checked_at", { mode: "timestamp_ms" }).notNull(),
 });
+
+export const presencesRelations = relations(presences, ({ one }) => ({
+  user: one(users, {
+    fields: [presences.userId],
+    references: [users.id],
+  }),
+}));
 
 export const payments = sqliteTable("payment", {
   id: text("id").notNull().primaryKey(),

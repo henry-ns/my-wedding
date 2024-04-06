@@ -26,8 +26,7 @@ type Props = {
 
 export function PaymentInfo({ index, payment }: Props) {
   return (
-    <div
-      key={payment.id}
+    <li
       className="flex flex-col gap-4 rounded-xl bg-primary-100 p-4"
     >
       <Suspense
@@ -65,6 +64,6 @@ export function PaymentInfo({ index, payment }: Props) {
           </div>
         </div>
       ))}
-    </div>
+    </li>
   );
 }
