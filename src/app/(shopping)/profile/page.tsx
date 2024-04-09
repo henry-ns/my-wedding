@@ -22,7 +22,7 @@ export default async function ProfilePage() {
     getUser(session.user.id),
   ]);
 
-  const limitDate = addDays(env.NEXT_PUBLIC_WEDDING_DATE, -30);
+  const limitDate = addDays(env.NEXT_PUBLIC_WEDDING_DATE, -8);
   const available = isBefore(new Date(), limitDate);
 
   return (
