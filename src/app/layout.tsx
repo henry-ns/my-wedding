@@ -15,6 +15,7 @@ const bodyFont = Lato({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-sans",
+  fallback: ["Arial"],
 });
 
 export const metadata: Metadata = {
@@ -27,12 +28,12 @@ type Props = {
   children: React.ReactNode;
 };
 
+const style = `bg-bg ${bodyFont.variable} ${headingFont.variable} font-sans`;
+
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="pt">
-      <body
-        className={`bg-bg${bodyFont.variable}${headingFont.variable}font-sans`}
-      >
+      <body className={style}>
         <ToastProvider>{children}</ToastProvider>
         <SpeedInsights />
         <Analytics />
